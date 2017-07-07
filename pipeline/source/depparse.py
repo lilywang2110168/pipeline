@@ -41,7 +41,7 @@ def feat_equals(feat1, feat2):
     stem1 = [stemmer.stem(w) for w in split1]
     stem2 = [stemmer.stem(w) for w in split2]
     equal = map(lambda x: x[0] == x[1], zip(stem1, stem2))
-    return reduce(lambda x, y: x and y, equal)
+    return all(equal)
 
 
 def dependency_features(nlp, text):
@@ -73,12 +73,12 @@ def dependency_features(nlp, text):
     occurances = []
     for feat_index, desc_indices in descriptor_map.iteritems():
         descriptors = []
-        feat_negs = map(lambda i: doc[i], neg_map[feat_index])
+        feat_negs = map(doc.__getitem__, neg_map[feat_index])
         for desc_index in desc_indices:
-            negs = map(lambda i: doc[i], neg_map[desc_index])
-            advs = map(lambda i: doc[i], adv_map[desc_index])
+            negs = map(doc.__getitem__, neg_map[desc_index])
+            advs = map(doc.__getitem__, adv_map[desc_index])
             descriptors.append({'token': doc[desc_index], 'negs': negs + feat_negs, 'advs': advs})
-        compounds = map(lambda i: doc[i], compound_map[feat_index])
+        compounds = map(doc.__getitem__, compound_map[feat_index])
         occurance = {'token': doc[feat_index], 'compounds': compounds, 'descriptors': descriptors}
         occurances.append(occurance)
 
