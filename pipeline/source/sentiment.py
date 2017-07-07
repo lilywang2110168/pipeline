@@ -7,7 +7,7 @@ def feature_sentiment(descriptors):
 
 
 def descriptor_sentiment(descriptor):
-    synsets = swn.senti_synsets(descriptor['word'])
+    synsets = swn.senti_synsets(str(descriptor['token']))
     if not synsets:
         return 0
     sentiment = mean(map(synset_sentiment, synsets))
