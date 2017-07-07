@@ -23,10 +23,11 @@ def feat_in(dep_feat, feats):
 
 def dep_feat_equals(dep_feat, feat):
     if not dep_feat['compounds']:
-        return feat_equals(dep_feat['word'], feat)
-    for num_compounds in range(1, len(dep_feat['compounds']) + 1):
-        for compounds in permutations(dep_feat['compounds'], num_compounds):
-            compound_feat = ' '.join(compounds) + ' ' + dep_feat['word']
+        return feat_equals(str(dep_feat['token']), feat)
+    compound_words = map(str, dep_feat['compounds'])
+    for num_compounds in range(1, len(compound_words) + 1):
+        for compounds in permutations(compound_words, num_compounds):
+            compound_feat = ' '.join(compounds) + ' ' + str(dep_feat['token'])
             if feat_equals(compound_feat, feat):
                 return True
     return False
