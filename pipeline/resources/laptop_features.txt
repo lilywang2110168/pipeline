@@ -1,0 +1,31 @@
+price: 4631
+keyboard: 3186
+machine: 2805
+window: 1850
+quality: 1808
+game: 1730
+performance: 1456
+size: 1449
+software: 1446
+purchase: 1395
+battery life: 1414
+hard drive: 1089
+touch screen: 649
+customer service: 457
+light weight: 409
+operating system: 398
+mouse pad: 229
+tech support: 179
+backlit keyboard: 171
+build quality: 156
+screen size: 146
+screen resolution: 145
+video card: 139
+wireless mouse: 126
+hard disk: 126
+sound quality: 125
+large screen: 125
+word processing: 121
+school work: 118
+big screen: 117
+power cord: 111
