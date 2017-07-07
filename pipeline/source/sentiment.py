@@ -7,7 +7,17 @@ def feature_sentiment(descriptors):
 
 
 def descriptor_sentiment(descriptor):
-    synsets = swn.senti_synsets(str(descriptor['token']))
+    if descriptor['token'].pos_ == 'VERB':
+        pos = 'v'
+    elif descriptor['token'].pos_ == 'ADJ':
+        pos = 'a'
+    elif descriptor['token'].pos_ == 'NOUN':
+        pos = 'n'
+    elif descriptor['token'].pos_ == 'ADV':
+        pos = 'a'
+    else:
+        return 0
+    synsets = swn.senti_synsets(str(descriptor['token']), pos)
     if not synsets:
         return 0
     sentiment = mean(map(synset_sentiment, synsets))
