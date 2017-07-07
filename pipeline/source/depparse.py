@@ -47,8 +47,8 @@ def feat_equals(feat1, feat2):
 def dependency_features(nlp, text):
     '''
     output ::= list<occurance>
-    occurance ::= {'word': word, 'compunds': list<compound>, 'descriptors': list<descriptor>}
-    descriptor ::= {'word': word, 'negs': list<neg>, 'advs': list<adv>}
+    occurance ::= {'token': token, 'compunds': list<token>, 'descriptors': list<descriptor>}
+    descriptor ::= {'token': token, 'negs': list<token>, 'advs': list<token>}
     '''
 
     doc = nlp(unicode(text))
@@ -73,13 +73,13 @@ def dependency_features(nlp, text):
     occurances = []
     for feat_index, desc_indices in descriptor_map.iteritems():
         descriptors = []
-        feat_negs = map(lambda i: str(doc[i]), neg_map[feat_index])
+        feat_negs = map(lambda i: doc[i], neg_map[feat_index])
         for desc_index in desc_indices:
-            negs = map(lambda i: str(doc[i]), neg_map[desc_index])
-            advs = map(lambda i: str(doc[i]), adv_map[desc_index])
-            descriptors.append({'word': str(doc[desc_index]), 'negs': negs + feat_negs, 'advs': advs})
-        compounds = map(lambda i: str(doc[i]), compound_map[feat_index])
-        occurance = {'word': str(doc[feat_index]), 'compounds': compounds, 'descriptors': descriptors}
+            negs = map(lambda i: doc[i], neg_map[desc_index])
+            advs = map(lambda i: doc[i], adv_map[desc_index])
+            descriptors.append({'token': doc[desc_index], 'negs': negs + feat_negs, 'advs': advs})
+        compounds = map(lambda i: doc[i], compound_map[feat_index])
+        occurance = {'token': doc[feat_index], 'compounds': compounds, 'descriptors': descriptors}
         occurances.append(occurance)
 
     return occurances
