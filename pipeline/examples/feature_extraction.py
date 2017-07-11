@@ -2,6 +2,7 @@ import nltk
 import codecs
 import time
 
+from pipeline.source.feature_extraction import (getBigrams, getUnigrams, getRepresentativeFeatures, pruneFeature, getTopFeatures)
 
 start_time = time.time()
 
