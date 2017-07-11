@@ -1,11 +1,5 @@
 import nltk
 import codecs
-import numpy as np
-import itertools
-import os, glob
-import collections
-import operator
-from nltk.stem import WordNetLemmatizer
 import time
 
 
