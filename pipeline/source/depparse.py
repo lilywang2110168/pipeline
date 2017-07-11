@@ -41,7 +41,7 @@ def feat_equals(feat1, feat2):
     stemmer = nltk.stem.PorterStemmer()
     stem1 = map(stemmer.stem, split1)
     stem2 = map(stemmer.stem, split2)
-    equal = map(lambda x: x[0] == x[1], zip(stem1, stem2))
+    equal = [s1 == s2 for s1, s2 in zip(stem1, stem2)]
     return all(equal)
 
 
