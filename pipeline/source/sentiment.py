@@ -1,9 +1,11 @@
+from __future__ import division
+
 from nltk.corpus import sentiwordnet as swn
-from numpy import (average, mean, sign, sqrt)
+from numpy import (average, mean, sign)
 
 
 def feature_sentiment(descriptors):
-    return scale(mean(map(descriptor_sentiment, descriptors)))
+    return scale(mean(map(descriptor_sentiment, descriptors)), root=3)
 
 
 def descriptor_sentiment(descriptor):
@@ -30,5 +32,5 @@ def synset_sentiment(synset):
     return synset.pos_score() - synset.neg_score()
 
 
-def scale(sentiment):
-    return 3 + 2 * sign(sentiment) * sqrt(sqrt(abs(sentiment)))
+def scale(sentiment, root):
+    return 3 + 2 * sign(sentiment) * (abs(sentiment) ** (1 / root))
