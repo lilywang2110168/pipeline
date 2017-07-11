@@ -39,8 +39,8 @@ def feat_equals(feat1, feat2):
     if len(split1) != len(split2):
         return False
     stemmer = nltk.stem.PorterStemmer()
-    stem1 = [stemmer.stem(w) for w in split1]
-    stem2 = [stemmer.stem(w) for w in split2]
+    stem1 = map(stemmer.stem, split1)
+    stem2 = map(stemmer.stem, split2)
     equal = map(lambda x: x[0] == x[1], zip(stem1, stem2))
     return all(equal)
 
