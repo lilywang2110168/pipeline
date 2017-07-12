@@ -45,14 +45,12 @@ def feat_equals(feat1, feat2):
     return all(equal)
 
 
-def dependency_features(nlp, text):
+def dependency_features(doc):
     '''
     output ::= list<occurance>
     occurance ::= {'token': token, 'compunds': list<token>, 'descriptors': list<descriptor>}
     descriptor ::= {'token': token, 'negs': list<token>, 'advs': list<token>}
     '''
-
-    doc = nlp(unicode(text))
 
     descriptor_map = defaultdict(list)  # feat_index -> list<desc_index>
     compound_map = defaultdict(list)  # feat_index -> list<compound_index>
