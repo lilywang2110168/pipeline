@@ -1,4 +1,6 @@
 import codecs
+import os
+
 import nltk
 from nltk.stem import WordNetLemmatizer
 
@@ -62,7 +64,8 @@ stopPhrases = set(
     ['price range', 'price point', 'star rating', 'quality product', 'great product', 'good product', 'price tag'])
 brandSet = set()
 # the brand file
-with codecs.open('../resources/laptop_brands.txt', "r", encoding="utf-8", errors='ignore') as f2:
+path = os.path.join(os.path.dirname(__file__), '../resources/laptop_brands.txt')
+with codecs.open(path, "r", encoding="utf-8", errors='ignore') as f2:
     for line in f2:
         brand = line.strip()
         brandSet.add(brand)
