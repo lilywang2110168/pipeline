@@ -32,7 +32,7 @@ def correct_punctuation(review):
     review = re.sub(r'\.([a-zA-Z])', r'. \1', review)
     review = re.sub('\.\.+', '.', review)
     review = re.sub('\!\!+', '!', review)
-    review = re.sub('\?\?+', '!', review)
+    review = re.sub('\?\?+', '?', review)
     return review
 
 
