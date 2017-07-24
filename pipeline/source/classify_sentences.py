@@ -6,6 +6,7 @@ import cPickle as pickle
 from functools import partial
 import json
 import os
+import re
 
 import nltk
 from sklearn.externals import joblib
@@ -25,6 +26,14 @@ def is_json(myjson):
     except ValueError:
         return False
     return True
+
+
+def correct_punctuation(review):
+    review = re.sub(r'\.([a-zA-Z])', r'. \1', review)
+    review = re.sub('\.\.+', '.', review)
+    review = re.sub('\!\!+', '!', review)
+    review = re.sub('\?\?+', '!', review)
+    return review
 
 
 model_folder = os.path.join(os.path.dirname(__file__), '..', 'models', args.model_id)
@@ -51,7 +60,9 @@ with open(input_path) as input_file, open(output_path, 'w+') as output_file:
             print 'line {}'.format(i)
         if is_json(line):
             obj = json.loads(line)
-            sentences = nltk.sent_tokenize(obj['reviewText'])
+            review = obj['reviewText']
+            review = correct_punctuation(review)
+            sentences = nltk.sent_tokenize(review)
             tokens = map(nltk.word_tokenize, sentences)
             tokens = preprocess_tokens(tokens)
             if len(tokens) > 0:
