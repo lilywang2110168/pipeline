@@ -71,6 +71,7 @@ with open(input_path) as input_file, open(output_path, 'w+') as output_file:
                 subjective_sentences = [sent for sent, pred in zip(sentences, ypredict) if pred == SUBJECTIVE]
                 obj['reviewText'] = ' '.join(subjective_sentences)
                 json.dump(obj, output_file)
+                output_file.write('\n')
             sents += len(sentences)
             subj_sents += len(subjective_sentences)
 
