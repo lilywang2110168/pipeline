@@ -1,3 +1,6 @@
 *.pyc
 
 .idea/
+
+pipeline/models/
+pipeline/output/
