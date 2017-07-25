@@ -1,10 +1,10 @@
 import os
-os.environ['PYSPARK_SUBMIT_ARGS'] = '--jars /Applications/Ensemble/dev/java/lib/JDK18/cache-jdbc-2.0.0.jar,/Applications/Ensemble/dev/java/lib/JDK18/cache-spark-2.0.0.jar pyspark-shell'
+os.environ['PYSPARK_SUBMIT_ARGS'] = '--jars /Nate/jars/cache-jdbc-2.0.0.jar,/Nate/jars/cache-spark-2.0.0.jar pyspark-shell'
 import pyspark
 
 def get_sc():
     conf = pyspark.SparkConf() \
-        .set('spark.cache.master.url', 'Cache://localhost:1972/USER') \
+        .set('spark.cache.master.url', 'Cache://cache-Lily-DM-PROD-0001:1972/DB') \
         .set("spark.cache.master.user", "_system") \
         .set("spark.cache.master.password", "SYS")
     return pyspark.SparkContext(master='local[*]', appName='reviews', conf=conf)

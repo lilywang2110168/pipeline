@@ -1,15 +1,15 @@
 import nltk
 import pyspark
 
-from pipeline.source.feature_extraction import (getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
+from feature_extraction import (getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
-from pipeline.source.spark import (get_sc, load_table)
+from spark import (get_sc, load_table)
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
-load_table(spark, 'reviews')
-rows = spark.sql('SELECT top 200000 reviewText FROM reviews')
-reviews = [row.reviewText for row in rows]
+load_table(spark, 'natetest')
+df = spark.sql('SELECT one from natetest')
+df.show()
 
 tokens = map(nltk.word_tokenize, reviews)
 grammar = r"""
