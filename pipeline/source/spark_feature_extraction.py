@@ -12,7 +12,7 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 df.show()
 
 
-reviews = [ df.reviewText for i in df.collect()]
+reviews = [ String(df.reviewText) for i in df.collect()]
 
 print reviews
 '''
