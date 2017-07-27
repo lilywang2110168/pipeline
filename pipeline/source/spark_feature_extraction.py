@@ -14,6 +14,8 @@ df.show()
 
 reviews = [ i.reviewText for i in df.collect()]
 
+
+
 print "I am here"
 
 tokens = map(nltk.word_tokenize, reviews)
