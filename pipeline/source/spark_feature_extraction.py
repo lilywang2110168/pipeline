@@ -17,7 +17,7 @@ sentences=[]
 for line in reviews:
   sents = nltk.sent_tokenize(line)
     for sent in sents:
-            sentences.append(sent)
+      sentences.append(sent)
 
 
 
