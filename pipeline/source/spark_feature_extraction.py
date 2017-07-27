@@ -8,7 +8,7 @@ from spark import (get_sc, load_table)
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
-df = spark.sql('SELECT reviewText from AmazonReviews')
+df = spark.sql('SELECT reviewerName from AmazonReviews')
 df.show()
 
 
