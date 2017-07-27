@@ -1,5 +1,5 @@
 import os
-os.environ['PYSPARK_SUBMIT_ARGS'] = '--jars /Nate/jars/cache-jdbc-2.0.0.jar,/Nate/jars/cache-spark-2.0.0.jar pyspark-shell'
+os.environ['PYSPARK_SUBMIT_ARGS'] = '--jars /nate/jars/cache-jdbc-2.0.0.jar,/nate/jars/cache-spark-2.0.0.jar pyspark-shell'
 import pyspark
 
 def get_sc():
