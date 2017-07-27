@@ -14,7 +14,7 @@ df.show()
 
 reviews = [ df.reviewText for i in df.collect()]
 
- print reviews
+print reviews
 '''
 tokens = map(nltk.word_tokenize, reviews)
 grammar = r"""
