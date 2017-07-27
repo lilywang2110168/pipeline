@@ -10,7 +10,7 @@ spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'natetest')
 df = spark.sql('SELECT one from natetest')
 df.show()
-
+'''
 tokens = map(nltk.word_tokenize, reviews)
 grammar = r"""
  NP: {<NN><NN>}   # nouns and nouns
@@ -33,3 +33,4 @@ myList = getTopFeatures(dictionary, 10)
 print myList
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
+'''
