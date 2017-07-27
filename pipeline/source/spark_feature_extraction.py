@@ -7,9 +7,12 @@ from spark import (get_sc, load_table)
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
-load_table(spark, 'natetest')
-df = spark.sql('SELECT one from natetest')
+load_table(spark, 'LaptopReviews')
+df = spark.sql('SELECT reviewText from LaptopReviews')
 df.show()
+
+
+
 '''
 tokens = map(nltk.word_tokenize, reviews)
 grammar = r"""
