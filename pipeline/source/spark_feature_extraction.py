@@ -7,8 +7,8 @@ from spark import (get_sc, load_table)
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
-load_table(spark, 'LaptopReviews')
-df = spark.sql('SELECT reviewText from LaptopReviews')
+load_table(spark, 'reviews')
+df = spark.sql('SELECT reviewText from reviews LIMIT 10')
 df.show()
 
 
