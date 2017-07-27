@@ -23,7 +23,8 @@ for line in reviews:
 
 print "I am here"
 
-tokens = map(nltk.word_tokenize, reviews)
+tokens = [nltk.word_tokenize(sent) for sent in sentences]
+tokens = [nltk.pos_tag(sent) for sent in tokens]
 
 print "now I am here"
 grammar = r"""
