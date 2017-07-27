@@ -13,6 +13,12 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 
 reviews = [ str(i.reviewText) for i in df.collect()]
 
+sentences=[]
+for line in reviews:
+  sents = nltk.sent_tokenize(line)
+    for sent in sents:
+            sentences.append(sent)
+
 
 
 print "I am here"
