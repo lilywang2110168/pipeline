@@ -15,5 +15,5 @@ def load_table(spark, table_name):
         .option('dbtable', 'ISC_DM.{}'.format(table_name)) \
         .load()
     df.registerTempTable(table_name)
-    spark.sql('CACHE TABLE {}'.format(table_name)).collect()
+    ##spark.sql('CACHE TABLE {}'.format(table_name)).collect()
     return df
