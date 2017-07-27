@@ -11,11 +11,15 @@ load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 df.show()
 
+for i in df.collect():
+  print i
+  print i.reviewText
 
+'''
 reviews = [ str(df.reviewText) for i in df.collect()]
 
 print reviews
-'''
+
 tokens = map(nltk.word_tokenize, reviews)
 grammar = r"""
  NP: {<NN><NN>}   # nouns and nouns
