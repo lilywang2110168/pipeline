@@ -11,10 +11,7 @@ load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 df.show()
 
-reviews=df.reviewText
-print reviews
-print type(reviews)
-
+df.select("reviewText").flatMap(lambda x: x).collect()
 
 '''
 tokens = map(nltk.word_tokenize, reviews)
