@@ -11,6 +11,9 @@ load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 df.show()
 
+reviews=df.reviewText
+print reviews
+print type(reviews)
 
 
 '''
