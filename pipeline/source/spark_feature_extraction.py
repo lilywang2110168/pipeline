@@ -14,10 +14,11 @@ df.show()
 
 reviews = [ i.reviewText for i in df.collect()]
 
-print reviews
+print "I am here"
 
-'''
 tokens = map(nltk.word_tokenize, reviews)
+
+print "now I am here"
 grammar = r"""
  NP: {<NN><NN>}   # nouns and nouns
     {<JJ><NN>}          # ajetives and nouns
@@ -27,6 +28,9 @@ result = [cp.parse(sent) for sent in tokens]
 dictionary = getUnigrams(tokens)
 dictionaryPhrases = getBigrams(result)
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
+
+print "there"
+
 for item in deleteSingle:
     if item in dictionary:
         del dictionary[item]
@@ -39,4 +43,4 @@ myList = getTopFeatures(dictionary, 10)
 print myList
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
-'''
+
