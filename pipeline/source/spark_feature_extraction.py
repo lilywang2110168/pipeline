@@ -9,10 +9,9 @@ sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
-df.show()
 
 
-reviews = [ i.reviewText for i in df.collect()]
+reviews = [ str(i.reviewText) for i in df.collect()]
 
 
 
