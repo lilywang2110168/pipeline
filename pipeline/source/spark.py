@@ -4,7 +4,7 @@ import pyspark
 
 def get_sc():
     conf = pyspark.SparkConf() \
-        .set('spark.cache.master.url', 'Cache://cache-Lily-DM-PROD-0001:1972/DB') \
+        .set('spark.cache.master.url', 'Cache://cache-Lily3-DM-PROD-0001:1972/DB') \
         .set("spark.cache.master.user", "_system") \
         .set("spark.cache.master.password", "SYS")
     return pyspark.SparkContext(master='local[*]', appName='reviews', conf=conf)
