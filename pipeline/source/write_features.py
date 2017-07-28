@@ -1,5 +1,6 @@
 from spark import (get_sc, load_table)
 from pyspark.sql import Row
+import pyspark
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
