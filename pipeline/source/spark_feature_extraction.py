@@ -14,9 +14,15 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 ##reviews=sc.parallelize(df)
 
 reviews = [ str(i.reviewText) for i in df.collect()]
-reviews2=sc.parallelize(reviews)
-reviews2.map(lambda x:nltk.word_tokenize(x))
-print reviews2.collect()
+sentences=[]
+for line in reviews:
+  sents = nltk.sent_tokenize(line)
+  for sent in sents:
+    sentences.append(sent)
+  
+reviews=sc.parallelize(sentences)
+reviews.map(lambda x:nltk.word_tokenize(x))
+print reviews.collect()
 
 
 '''
