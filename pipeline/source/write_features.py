@@ -15,3 +15,7 @@ schemaCategory.show()
 
 schemaCategory.write.mode("overwrite").format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory"))
 
+schemaCategory.write.format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory"))
+
+schemaCategory.write.format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
+
