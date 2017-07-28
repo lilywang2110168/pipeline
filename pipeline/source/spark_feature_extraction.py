@@ -11,7 +11,7 @@ load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 
 #parallel programming
-reviews=sc.parallelize(df,16)
+reviews=sc.parallelize(df)
 
 reviews.map(lambda x: nltk.word_tokenize(x.reviewText))
 
