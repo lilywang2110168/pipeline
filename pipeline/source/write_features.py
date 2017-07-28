@@ -11,3 +11,7 @@ rdd = sc.parallelize(featureList)
 category = rdd.map(lambda x: Row(feature=x[0], category=int(x[1])))
 schemaCategory = spark.createDataFrame(category)
 schemaCategory.show()
+
+
+schemaCategory.write.mode("overwrite").format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format(testCategory))
+
