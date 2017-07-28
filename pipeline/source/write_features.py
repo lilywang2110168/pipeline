@@ -5,7 +5,7 @@ import pyspark
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
-featureList=[('electronics',1), ('laptops',2), ('heaphones',3)]
+featureList=[('electronics','1'), ('laptops','2'), ('heaphones','3')]
 
 rdd = sc.parallelize(featureList)
 category = rdd.map(lambda x: Row(categoryName=x[0], ID=x[1]))
