@@ -14,7 +14,7 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 ##reviews=sc.parallelize(df)
 
 reviews = [ str(i.reviewText) for i in df.collect()]
-reviews2.parallelize(reviews)
+reviews2=sc.parallelize(reviews)
 reviews2.map(lambda x:nltk.word_tokenize(x))
 print reviews2
 
