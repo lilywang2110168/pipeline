@@ -14,6 +14,7 @@ def load_table(spark, table_name):
         .format('com.intersys.spark') \
         .option('dbtable', 'ISC_DM.{}'.format(table_name)) \
         .load()
+    ##do you have to register this as a temp table?     
     df.registerTempTable(table_name)
     ##spark.sql('CACHE TABLE {}'.format(table_name)).collect()
     return df
