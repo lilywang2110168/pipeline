@@ -10,10 +10,10 @@ spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 
-#parallel programming
-reviews=sc.parallelize(df)
+#parallel programming don't need to prallelize an existing dataframe
+##reviews=sc.parallelize(df)
 
-reviews.map(lambda x: nltk.word_tokenize(x.reviewText))
+df.map(lambda x: nltk.word_tokenize(x.reviewText))
 
 
 reviews = [ str(i.reviewText) for i in df.collect()]
