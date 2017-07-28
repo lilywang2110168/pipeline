@@ -18,4 +18,4 @@ schemaCategory.show()
 ##schemaCategory.write.mode('overwrite').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
 
 ##this line of code appends to a table!
-schemaCategory.write.mode('append').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
+##schemaCategory.write.mode('append').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
