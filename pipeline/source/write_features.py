@@ -5,10 +5,10 @@ import pyspark
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
-featureList=['electronics', 'laptops', 'heaphones']
+featureList=[('electronics',1), ('laptops',2), ('heaphones',3)]
 
 rdd = sc.parallelize(featureList)
-category = rdd.map(lambda x: Row(categoryName=x))
+category = rdd.map(lambda x: Row(categoryName=x[0], ID=x[1]))
 schemaCategory = spark.createDataFrame(category)
 schemaCategory.show()
 
