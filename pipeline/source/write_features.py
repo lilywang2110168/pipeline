@@ -9,5 +9,5 @@ featureList=[('machine', 38046), ('quality', 20615), ('software', 19452), ('mode
 
 rdd = sc.parallelize(featureList)
 category = rdd.map(lambda x: Row(feature=x[0], category=int(x[1])))
-schemaCategory = sqlContext.createDataFrame(category)
+schemaCategory = spark.createDataFrame(category)
 shemaCategory.show()
