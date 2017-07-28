@@ -10,6 +10,19 @@ spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 
+#parallel programming
+reviews=sc.parallelize(df,16)
+
+reviews.map(lambda x.reviewText: nltk.word_tokenize(x.reviewText))
+
+
+reviews = [ str(i.reviewText) for i in df.collect()]
+print reviews
+
+
+'''
+mydata.map(lambda x: x.split('\t')).\
+    map(lambda y: (y[0], y[2], y[1]))
 
 reviews = [ str(i.reviewText) for i in df.collect()]
 
@@ -52,3 +65,4 @@ print myList
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
 
+'''
