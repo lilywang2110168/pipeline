@@ -21,7 +21,8 @@ for line in reviews:
     sentences.append(sent)
   
 reviews=sc.parallelize(sentences)
-reviews2=reviews.map(lambda x:nltk.word_tokenize(x))
+reviews2=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x))
+
 print reviews2.collect()
 
 
