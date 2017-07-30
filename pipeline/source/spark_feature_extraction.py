@@ -1,6 +1,6 @@
 import nltk
 import pyspark
-from multiprocessing.dummy import Pool as ThreadPool 
+from multiprocessing import Pool
 
 from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
@@ -30,7 +30,7 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 sentences = [ str(i.reviewText) for i in df.collect()]
-pool = ThreadPool(16) 
+pool = Pool(16) 
 results = pool.map(nltk.word_tokenize, sentences)
 
 pool.close() 
