@@ -6,16 +6,19 @@ from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeat
 from spark import (get_sc, load_table)
 
 
+
+sc = get_sc()
+spark = pyspark.sql.SparkSession(sc)
+
 #globals
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 dictionary = {}
+count = spark.accumulator(1)
 
 def getUnigrams(sent):  
-  global count
-  count=count+1
+  count+=1
   for word in sent:
-    print word
     if word[1] == 'NN' or word[1] == 'NNS':
      
 
@@ -36,9 +39,6 @@ def getUnigrams(sent):
           return dictionary
 
 
-
-sc = get_sc()
-spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
 df = spark.sql('SELECT reviewText from AmazonReviews')
 
