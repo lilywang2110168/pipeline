@@ -13,6 +13,7 @@ dictionary = {}
 
 def getUnigrams(sent):    
   for word in sent:
+    print word
     if word[1] == 'NN' or word[1] == 'NNS':
 
                 # lemmitizing
@@ -52,10 +53,6 @@ tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.p
 result=tokens.map(lambda x:cp.parse(x))
 
 print tokens.map(lambda x: getUnigrams(x)).take(5)
-print ""
-print result.take(1)
-
-
 
 print dictionary
 
