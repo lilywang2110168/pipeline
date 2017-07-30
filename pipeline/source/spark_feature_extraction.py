@@ -21,7 +21,14 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 
 #parallel programming don't need to prallelize an existing dataframe
 ##reviews=sc.parallelize(df)
-
+def parseGrammer(sent):
+  grammar = r"""
+    NP: {<NN><NN>}   # nouns and nouns
+    {<JJ><NN>}          # ajetives and nouns
+      """
+  cp = nltk.RegexpParser(grammar)
+  return cp.parse(sent)
+  
 grammar = r"""
  NP: {<NN><NN>}   # nouns and nouns
     {<JJ><NN>}          # ajetives and nouns
@@ -35,7 +42,7 @@ pool = Pool(16)
 tokens = pool.map(nltk.word_tokenize, sentences)
 tokens= pool.map(nltk.pos_tag, tokens)
 print "haha"
-result=pool.map(cp.parse, tokens)
+result=pool.map(parseGrammar, tokens)
 print "I am here"
 pool.close() 
 pool.join() 
