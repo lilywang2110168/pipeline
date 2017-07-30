@@ -20,6 +20,9 @@ print reviews
 
 
 '''
+ def f(person):
+   print(person.name)
+df.foreach(f)
 
 reviews = [ str(i.reviewText) for i in df.collect()]
 sentences=[]
