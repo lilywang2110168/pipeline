@@ -13,30 +13,7 @@ spark = pyspark.sql.SparkSession(sc)
 #globals
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
-dictionary = {}
-
-def getUnigrams(sent):  
-  print "I am here"
-  for word in sent:
-    if word[1] == 'NN' or word[1] == 'NNS':
-     
-
-                # lemmitizing
-        tmp = lemmatizer.lemmatize(word[0], pos='n')
-        tmp = tmp.encode('ascii', 'ignore').lower()
-        oriword = tmp
-        tmp = ps.stem(tmp)
-        tmp = tmp.encode('ascii', 'ignore').lower()
-        if tmp in dictionary:
-          dictionary[tmp]['num'] = dictionary[tmp]['num'] + 1
-          if oriword in dictionary[tmp]:
-            dictionary[tmp][oriword] = dictionary[tmp][oriword] + 1
-          else:
-            dictionary[tmp][oriword] = 1
-        else:
-          dictionary[tmp] = {'num': 1, oriword: 1}
-  print dictionary
-  return dictionary
+≈
 
 
 load_table(spark, 'AmazonReviews')
@@ -52,8 +29,11 @@ grammar = r"""
 
 cp = nltk.RegexpParser(grammar)
 
+sentences = [ str(i.reviewText) for i in df.collect()]
+reviews=sc.parallelize(sentences)
+
 #not doing sentence tokenizer
-tokens=df.rdd.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).collect()
+tokens=reviews.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).take(100)
 result=tokens.map(lambda x:cp.parse(x))
 
 print tokens
@@ -63,6 +43,11 @@ print tokens
 
                          
 '''
+
+
+
+tokens=df.rdd.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).collect()
+result=tokens.map(lambda x:cp.parse(x))
 
 dictionary = getUnigrams(tokens)
 dictionaryPhrases = getBigrams(result)
@@ -84,11 +69,6 @@ myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
 
 
-
-
- def f(person):
-   print(person.name)
-df.foreach(f)
 
 reviews = [ str(i.reviewText) for i in df.collect()]
 sentences=[]
