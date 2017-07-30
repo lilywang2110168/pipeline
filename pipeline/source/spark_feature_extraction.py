@@ -36,7 +36,7 @@ tokens=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x))
 result=tokens.map(lambda x:cp.parse(x))
 
 print tokens.collect()
-print result.collect()
+##print result.collect()
 
 ##print tokens.map(lambda x: getUnigrams(x)).collect()
 
