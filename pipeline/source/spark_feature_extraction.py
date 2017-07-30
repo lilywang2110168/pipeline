@@ -22,7 +22,7 @@ cp = nltk.RegexpParser(grammar)
 
 #not doing sentence tokenizer
 tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).take(5)
-result=tokens..map(lambda x:cp.parse(x)).take(5)
+result=tokens.map(lambda x:cp.parse(x)).take(5)
 
 print tokens
 print ""
