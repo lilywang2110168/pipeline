@@ -36,6 +36,9 @@ result= pool.map(nltk.pos_tag, tokens)
 
 pool.close() 
 pool.join() 
+
+print result
+
                  
 '''
 
