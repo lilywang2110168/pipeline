@@ -17,6 +17,7 @@ dictionary = {}
 count = sc.accumulator(1)
 
 def getUnigrams(sent):  
+  global count
   count+=1
   for word in sent:
     if word[1] == 'NN' or word[1] == 'NNS':
