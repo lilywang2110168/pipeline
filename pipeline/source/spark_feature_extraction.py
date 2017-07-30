@@ -37,7 +37,23 @@ result= pool.map(nltk.pos_tag, tokens)
 pool.close() 
 pool.join() 
 
-print result
+dictionary = getUnigrams(tokens)
+dictionaryPhrases = getBigrams(result)
+deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
+
+for item in deleteSingle:
+    if item in dictionary:
+        del dictionary[item]
+for item in deletePhrase:
+    if item in dictionaryPhrases:
+        del dictionaryPhrases[item]
+dictionary = getRepresentativeFeatures(dictionary, 10)
+dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
+myList = getTopFeatures(dictionary, 10)
+print myList
+myList2 = getTopFeatures(dictionaryPhrases, 20)
+print myList2
+
 
                  
 '''
