@@ -5,6 +5,27 @@ from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeat
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
+def getUnigrams(sent):    
+  for word in sent:
+    if word[1] == 'NN' or word[1] == 'NNS':
+
+                # lemmitizing
+        tmp = lemmatizer.lemmatize(word[0], pos='n')
+        tmp = tmp.encode('ascii', 'ignore').lower()
+        oriword = tmp
+        tmp = ps.stem(tmp)
+        tmp = tmp.encode('ascii', 'ignore').lower()
+        if tmp in dictionary:
+          dictionary[tmp]['num'] = dictionary[tmp]['num'] + 1
+          if oriword in dictionary[tmp]:
+            dictionary[tmp][oriword] = dictionary[tmp][oriword] + 1
+          else:
+            dictionary[tmp][oriword] = 1
+        else:
+          dictionary[tmp] = {'num': 1, oriword: 1}
+
+
+
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'AmazonReviews')
@@ -32,24 +53,7 @@ print result.take(1)
 dictionary = {}
 print dictionary
 
-def getUnigrams(sent):    
-  for word in sent:
-    if word[1] == 'NN' or word[1] == 'NNS':
 
-                # lemmitizing
-        tmp = lemmatizer.lemmatize(word[0], pos='n')
-        tmp = tmp.encode('ascii', 'ignore').lower()
-        oriword = tmp
-        tmp = ps.stem(tmp)
-        tmp = tmp.encode('ascii', 'ignore').lower()
-        if tmp in dictionary:
-          dictionary[tmp]['num'] = dictionary[tmp]['num'] + 1
-          if oriword in dictionary[tmp]:
-            dictionary[tmp][oriword] = dictionary[tmp][oriword] + 1
-          else:
-            dictionary[tmp][oriword] = 1
-        else:
-          dictionary[tmp] = {'num': 1, oriword: 1}
                          
 '''
 
