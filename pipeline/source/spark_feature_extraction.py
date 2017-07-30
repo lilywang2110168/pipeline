@@ -33,7 +33,7 @@ sentences = [ str(i.reviewText) for i in df.collect()]
 reviews=sc.parallelize(sentences)
 
 #not doing sentence tokenizer
-tokens=reviews.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).take(100)
+tokens=reviews.map(lambda x:nltk.word_tokenize(x).map(lambda x:nltk.pos_tag(x)).take(100)
 result=tokens.map(lambda x:cp.parse(x))
 
 print tokens
