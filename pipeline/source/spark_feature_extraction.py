@@ -29,14 +29,14 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 sentences = [ str(i.reviewText) for i in df.collect()]
-reviews=sc.parallelize(sentences,32)
+reviews=sc.parallelize(sentences)
 
 #not doing sentence tokenizer
-tokens=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x))
-result=tokens.map(lambda x:cp.parse(x))
+tokens=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x)).collect()
+result=sc.parallelize(tokens).map(lambda x:cp.parse(x)).collect()
 
-print tokens.collect()
-##print result.collect()
+print tokens
+print result
 
 ##print tokens.map(lambda x: getUnigrams(x)).collect()
 
