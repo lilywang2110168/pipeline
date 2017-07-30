@@ -21,7 +21,7 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 #not doing sentence tokenizer
-tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x)).collect()
+tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x))
 
 dictionary = getUnigrams(tokens)
 dictionaryPhrases = getBigrams(result)
