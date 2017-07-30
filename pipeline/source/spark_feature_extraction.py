@@ -13,7 +13,6 @@ spark = pyspark.sql.SparkSession(sc)
 #globals
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
-≈
 
 
 load_table(spark, 'AmazonReviews')
