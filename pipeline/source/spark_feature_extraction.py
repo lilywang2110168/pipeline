@@ -10,11 +10,10 @@ from spark import (get_sc, load_table)
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 dictionary = {}
-count=0
 
 def getUnigrams(sent):  
+  global count
   count=count+1
-  print count
   for word in sent:
     print word
     if word[1] == 'NN' or word[1] == 'NNS':
@@ -59,7 +58,7 @@ result=tokens.map(lambda x:cp.parse(x))
 
 print tokens.map(lambda x: getUnigrams(x)).take(1)
 
-print dictionary
+print count.value
 
 
                          
