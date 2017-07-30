@@ -36,14 +36,18 @@ grammar = r"""
 
 cp = nltk.RegexpParser(grammar)
 
+
 sentences = [ str(i.reviewText) for i in df.collect()]
-print "I am here"
+start_time = time.time()
+
 pool = Pool(24) 
 tokens = pool.map(nltk.word_tokenize, sentences)
 tokens= pool.map(nltk.pos_tag, tokens)
-print "haha"
+print("-- %s seconds ---tokenizing and POS tagging" % (time.time() - start_time))
+start_time = time.time()
 result=pool.map(parseGrammar, tokens)
-print "I am here"
+print("2--- %s seconds ---grammer" % (time.time() - start_time))
+start_time = time.time()
 pool.close() 
 pool.join() 
 
@@ -64,7 +68,7 @@ print myList
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
 
-
+print("2--- %s seconds ---the rest" % (time.time() - start_time))
                  
 '''
 
