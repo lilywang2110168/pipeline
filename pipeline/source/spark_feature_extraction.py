@@ -21,9 +21,27 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 #not doing sentence tokenizer
-reviews=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x)).take(5)
+tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x)).collect()
 
-print reviews
+dictionary = getUnigrams(tokens)
+dictionaryPhrases = getBigrams(result)
+deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
+
+print "there"
+
+for item in deleteSingle:
+    if item in dictionary:
+        del dictionary[item]
+for item in deletePhrase:
+    if item in dictionaryPhrases:
+        del dictionaryPhrases[item]
+dictionary = getRepresentativeFeatures(dictionary, 10)
+dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
+myList = getTopFeatures(dictionary, 10)
+print myList
+myList2 = getTopFeatures(dictionaryPhrases, 20)
+print myList2
+
 
 
 '''
