@@ -5,6 +5,9 @@ from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeat
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
+ps = nltk.stem.PorterStemmer()
+lemmatizer = WordNetLemmatizer()
+
 def getUnigrams(sent):    
   for word in sent:
     if word[1] == 'NN' or word[1] == 'NNS':
