@@ -13,7 +13,7 @@ dictionary = {}
 count=0
 
 def getUnigrams(sent):  
-  count+=1
+  count=count+1
   print count
   for word in sent:
     print word
