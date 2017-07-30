@@ -1,7 +1,7 @@
 import nltk
 import pyspark
 
-from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeatures,
+from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
@@ -38,9 +38,26 @@ result=sc.parallelize(tokens).map(lambda x:cp.parse(x)).collect()
 print tokens
 print result
 
-##print tokens.map(lambda x: getUnigrams(x)).collect()
+print "I am here"
 
+dictionary = getUnigrams(tokens)
+dictionaryPhrases = getBigrams(result)
+deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
+print "there"
+
+for item in deleteSingle:
+    if item in dictionary:
+        del dictionary[item]
+for item in deletePhrase:
+    if item in dictionaryPhrases:
+        del dictionaryPhrases[item]
+dictionary = getRepresentativeFeatures(dictionary, 10)
+dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
+myList = getTopFeatures(dictionary, 10)
+print myList
+myList2 = getTopFeatures(dictionaryPhrases, 20)
+print myList2
                          
 '''
 
