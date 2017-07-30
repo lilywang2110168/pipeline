@@ -10,11 +10,15 @@ from spark import (get_sc, load_table)
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 dictionary = {}
+count=0
 
-def getUnigrams(sent):    
+def getUnigrams(sent):  
+  count+=1
+  print count
   for word in sent:
     print word
     if word[1] == 'NN' or word[1] == 'NNS':
+     
 
                 # lemmitizing
         tmp = lemmatizer.lemmatize(word[0], pos='n')
