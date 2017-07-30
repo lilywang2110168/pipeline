@@ -30,7 +30,7 @@ def getUnigrams(sent):
             dictionary[tmp][oriword] = 1
         else:
           dictionary[tmp] = {'num': 1, oriword: 1}
-          print dictionary
+          return dictionary
 
 
 
