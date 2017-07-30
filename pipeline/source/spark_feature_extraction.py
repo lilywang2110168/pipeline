@@ -35,7 +35,7 @@ reviews=sc.parallelize(sentences)
 tokens=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x))
  
 
-print tokens.take(2000)
+print tokens.collect()
 
 ##print tokens.map(lambda x: getUnigrams(x)).collect()
 
