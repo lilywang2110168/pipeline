@@ -1,5 +1,6 @@
 import nltk
 import pyspark
+from multiprocessing.dummy import Pool as ThreadPool 
 
 from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
@@ -29,40 +30,25 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 sentences = [ str(i.reviewText) for i in df.collect()]
+pool = ThreadPool(16) 
+results = pool.map(nltk.word_tokenize, sentences)
+
+pool.close() 
+pool.join() 
+                 
+'''
+
+##USING SPARK MAP...
+sentences = [ str(i.reviewText) for i in df.collect()]
 reviews=sc.parallelize(sentences)
+
 
 #not doing sentence tokenizer
 tokens=reviews.map(lambda x:nltk.word_tokenize(x)).map(lambda x:nltk.pos_tag(x)).collect()
 result=sc.parallelize(tokens).map(lambda x:cp.parse(x)).collect()
 
-print tokens
-print result
 
-print "I am here"
-
-dictionary = getUnigrams(tokens)
-dictionaryPhrases = getBigrams(result)
-deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
-
-print "there"
-
-for item in deleteSingle:
-    if item in dictionary:
-        del dictionary[item]
-for item in deletePhrase:
-    if item in dictionaryPhrases:
-        del dictionaryPhrases[item]
-dictionary = getRepresentativeFeatures(dictionary, 10)
-dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
-myList = getTopFeatures(dictionary, 10)
-print myList
-myList2 = getTopFeatures(dictionaryPhrases, 20)
-print myList2
-                         
-'''
-
-
-
+##USING RDD MAP WHICH DOES NOT UTINIZE MULTITHREADING
 tokens=df.rdd.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).collect()
 result=tokens.map(lambda x:cp.parse(x))
 
