@@ -22,7 +22,7 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 
 #parallel programming don't need to prallelize an existing dataframe
 ##reviews=sc.parallelize(df)
-def parseGrammer(sent):
+def parseGrammar(sent):
   grammar = r"""
     NP: {<NN><NN>}   # nouns and nouns
     {<JJ><NN>}          # ajetives and nouns
