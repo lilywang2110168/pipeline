@@ -14,7 +14,7 @@ spark = pyspark.sql.SparkSession(sc)
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 dictionary = {}
-count = spark.accumulator(1)
+count = sc.accumulator(1)
 
 def getUnigrams(sent):  
   count+=1
