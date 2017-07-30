@@ -32,7 +32,7 @@ cp = nltk.RegexpParser(grammar)
 sentences = [ str(i.reviewText) for i in df.collect()]
 pool = Pool(16) 
 tokens = pool.map(nltk.word_tokenize, sentences)
-result= pool.map(nltk.pos_tagging, tokens)
+result= pool.map(nltk.pos_tag, tokens)
 
 pool.close() 
 pool.join() 
