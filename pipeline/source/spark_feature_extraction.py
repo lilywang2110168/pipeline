@@ -13,6 +13,15 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 #parallel programming don't need to prallelize an existing dataframe
 ##reviews=sc.parallelize(df)
 
+
+reviews=df.select('reviewText').map(lambda x:nltk.word_tokenize(x)) 
+.map(lambda x:nltk.pos_tag(x)).take(5)
+
+print reviews
+
+
+'''
+
 reviews = [ str(i.reviewText) for i in df.collect()]
 sentences=[]
 for line in reviews:
@@ -21,13 +30,6 @@ for line in reviews:
     sentences.append(sent)
   
 reviews=sc.parallelize(sentences)
-reviews2=reviews.map(lambda x:nltk.word_tokenize(x)) \
-.map(lambda x:nltk.pos_tag(x))
-
-print reviews2.collect()
-
-
-'''
 mydata.map(lambda x: x.split('\t')).\
     map(lambda y: (y[0], y[2], y[1]))
 
