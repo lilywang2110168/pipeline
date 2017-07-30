@@ -24,7 +24,7 @@ cp = nltk.RegexpParser(grammar)
 tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x))
 result=tokens.map(lambda x:cp.parse(x))
 
-print tokens.map(lambda x: getUnigrams(x))
+print tokens.map(lambda x: getUnigrams(x)).take(5)
 print ""
 print result.take(1)
 
