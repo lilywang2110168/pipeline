@@ -21,7 +21,14 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 #not doing sentence tokenizer
-tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x))
+tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).take(5)
+result=tokens..map(lambda x:cp.parse(x)).take(5)
+
+print tokens
+print ""
+print result
+
+'''
 
 dictionary = getUnigrams(tokens)
 dictionaryPhrases = getBigrams(result)
@@ -44,7 +51,7 @@ print myList2
 
 
 
-'''
+
  def f(person):
    print(person.name)
 df.foreach(f)
