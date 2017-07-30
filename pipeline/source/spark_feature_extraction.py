@@ -14,11 +14,9 @@ spark = pyspark.sql.SparkSession(sc)
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 dictionary = {}
-count = sc.accumulator(1)
 
 def getUnigrams(sent):  
-  global count
-  count+=1
+  print "I am here"
   for word in sent:
     if word[1] == 'NN' or word[1] == 'NNS':
      
@@ -37,7 +35,7 @@ def getUnigrams(sent):
             dictionary[tmp][oriword] = 1
         else:
           dictionary[tmp] = {'num': 1, oriword: 1}
-          print dictionary
+  print dictionary
 
 
 load_table(spark, 'AmazonReviews')
