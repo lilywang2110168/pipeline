@@ -37,7 +37,7 @@ def getUnigrams(sent):
             dictionary[tmp][oriword] = 1
         else:
           dictionary[tmp] = {'num': 1, oriword: 1}
-          return dictionary
+          print dictionary
 
 
 load_table(spark, 'AmazonReviews')
