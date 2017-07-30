@@ -24,12 +24,13 @@ cp = nltk.RegexpParser(grammar)
 tokens=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x))
 result=tokens.map(lambda x:cp.parse(x))
 
-print tokens.map(lamda x: getUnigrams(sent))
+print tokens.map(lamda x: getUnigrams(x))
 print ""
 print result.take(1)
 
 
 dictionary = {}
+print dictionary
 
 def getUnigrams(sent):    
   for word in sent:
