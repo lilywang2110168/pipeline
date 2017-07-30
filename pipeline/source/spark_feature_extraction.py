@@ -38,7 +38,7 @@ cp = nltk.RegexpParser(grammar)
 
 sentences = [ str(i.reviewText) for i in df.collect()]
 print "I am here"
-pool = Pool(16) 
+pool = Pool(24) 
 tokens = pool.map(nltk.word_tokenize, sentences)
 tokens= pool.map(nltk.pos_tag, tokens)
 print "haha"
