@@ -5,8 +5,11 @@ from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeat
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
+
+#globals
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
+dictionary = {}
 
 def getUnigrams(sent):    
   for word in sent:
@@ -53,7 +56,7 @@ print ""
 print result.take(1)
 
 
-dictionary = {}
+
 print dictionary
 
 
