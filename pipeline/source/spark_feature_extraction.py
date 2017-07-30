@@ -6,7 +6,7 @@ from feature_extraction import ( getBigrams, pruneFeature, getRepresentativeFeat
 from spark import (get_sc, load_table)
 
 ps = nltk.stem.PorterStemmer()
-lemmatizer = WordNetLemmatizer()
+lemmatizer = nltk.stem.WordNetLemmatizer()
 
 def getUnigrams(sent):    
   for word in sent:
