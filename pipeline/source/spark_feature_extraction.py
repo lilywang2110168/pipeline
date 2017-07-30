@@ -30,10 +30,13 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 sentences = [ str(i.reviewText) for i in df.collect()]
+print "I am here"
 pool = Pool(16) 
 tokens = pool.map(nltk.word_tokenize, sentences)
-result= pool.map(nltk.pos_tag, tokens)
-
+tokens= pool.map(nltk.pos_tag, tokens)
+print "haha"
+result=pool.map(cp.parse, tokens)
+print "I am here"
 pool.close() 
 pool.join() 
 
