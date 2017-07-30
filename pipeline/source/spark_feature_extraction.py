@@ -13,8 +13,15 @@ df = spark.sql('SELECT reviewText from AmazonReviews')
 #parallel programming don't need to prallelize an existing dataframe
 ##reviews=sc.parallelize(df)
 
+grammar = r"""
+ NP: {<NN><NN>}   # nouns and nouns
+    {<JJ><NN>}          # ajetives and nouns
+"""
 
-reviews=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).take(5)
+cp = nltk.RegexpParser(grammar)
+
+#not doing sentence tokenizer
+reviews=df.rdd.map(lambda x:nltk.word_tokenize(x.reviewText)).map(lambda x:nltk.pos_tag(x)).map(lambda x:cp.parse(x)).take(5)
 
 print reviews
 
