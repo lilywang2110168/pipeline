@@ -17,7 +17,7 @@ df.show()
 
 data={}
 for i in df.collect():
-  data[i.reviewerID]["reviwerName"]=i.reviewerName
+  data[str(i.reviewerID)]["reviwerName"]=str(i.reviewerName)
 
 print data
 
