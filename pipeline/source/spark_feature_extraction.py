@@ -38,13 +38,12 @@ grammar = r"""
 cp = nltk.RegexpParser(grammar)
 
 
-reviews = [ str(i.reviewText) for i in df.collect()]
+def getSentences(row):
+  return str(row.reviewText)
+    
+pool = Pool(16) 
 
-sentences=[]
-for line in reviews:
-  sents = nltk.sent_tokenize(line)
-  for sent in sents:
-    sentences.append(sent)
+reviews=pool.map(getSentences, df.collect())
 print("2--- %s seconds ---loading data" % (time.time() - start_time))
 start_time = time.time()
 
