@@ -8,7 +8,7 @@ from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepre
 from spark import (get_sc, load_table)
 
 
-
+start_time = time.time()
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
@@ -45,7 +45,7 @@ for line in reviews:
   sents = nltk.sent_tokenize(line)
   for sent in sents:
     sentences.append(sent)
-
+print("2--- %s seconds ---loading data" % (time.time() - start_time))
 start_time = time.time()
 
 pool = Pool(16) 
@@ -62,10 +62,10 @@ pool.close()
 pool.join() 
 
 dictionary = getUnigrams(tokens)
-print("2--- %s seconds ---get unigtrams" % (time.time() - start_time))
+print("2--- %s seconds ---get unigrams" % (time.time() - start_time))
 start_time = time.time()
 dictionaryPhrases = getBigrams(result)
-print("2--- %s seconds ---get unigtrams bigrams" % (time.time() - start_time))
+print("2--- %s seconds ---get bigrams" % (time.time() - start_time))
 start_time = time.time()
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
