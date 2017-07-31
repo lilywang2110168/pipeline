@@ -41,7 +41,7 @@ dep_feats = depparse.dependency_features(doc)
 print("--- %s seconds ---getting def_feats" % (time.time() - start_time))
 start_time = time.time()
 
-print def_feats
+print dep_feats
 result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
 
 
