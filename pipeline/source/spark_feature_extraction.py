@@ -7,7 +7,7 @@ from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepre
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
-
+category='Laptops'
 start_time = time.time()
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
@@ -71,8 +71,12 @@ myList2 = getTopFeatures(dictionaryPhrases, 20)
 featurelist = myList2+myList
 
 data = {}
-data['asin'] = myList[int(id_)]
-            data['ocupationList']=resultList
+data['categoryName'] = category
+feature=[]
+for item in featurelist:
+  feature.append({featureName: item[0], popularityScore:item[1]})
+  
+data['features']=feature
 
 print("--- %s seconds ---the rest" % (time.time() - start_time))
                  
