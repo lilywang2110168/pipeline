@@ -61,7 +61,7 @@ stopwords = set(
      "your", "yours", "yourself", "yourselves", "z", "zero"])
 # stop words for bigrams
 stopPhrases = set(
-    ['price range', 'price point', 'star rating', 'quality product', 'great product', 'good product', 'price tag'])
+    ['price range', 'price point', 'star rating', 'quality product', 'great product', 'good product', 'price tag','big deal'])
 brandSet = set()
 # the brand file
 path = os.path.join(os.path.dirname(__file__), '../resources/laptop_brands.txt')
