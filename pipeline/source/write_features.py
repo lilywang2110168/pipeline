@@ -9,11 +9,10 @@ featurelist=[('battery life', 13678), ('hard drive', 10898), ('touch screen', 54
 
 data = {}
 data['categoryName'] = category
-features=[]
+features={}
 for item in featurelist:
-  feature={}
-  feature["featureName"]=item[0]
-  feature["popularityScore"]=item[1]
+  features[item[0]]={}
+  features[item[0]]["popularityScore"]=item[1]
   features.append(feature)
   
 data['features']=features
