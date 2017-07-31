@@ -29,14 +29,6 @@ def parseGrammar(sent):
   cp = nltk.RegexpParser(grammar)
   return cp.parse(sent)
   
-grammar = r"""
- NP: {<NN><NN>}   # nouns and nouns
-    {<JJ><NN>}          # ajetives and nouns
-"""
-
-cp = nltk.RegexpParser(grammar)
-
-
 def getSentences(row):
   return str(row.reviewText)
     
