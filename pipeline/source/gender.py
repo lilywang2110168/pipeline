@@ -13,7 +13,7 @@ MALE = 1;
 UNKNOWN = 2;
 load_table(spark, 'LilyLaptopReviews')
 df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
-               
+df.show()               
                
 '''
 def guessGender(fullname):
