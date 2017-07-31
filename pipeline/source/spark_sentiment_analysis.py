@@ -52,8 +52,12 @@ result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
 print("--- %s seconds ---getting feature_descriptor" % (time.time() - start_time))
 start_time = time.time()
 sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
+
+print sentiments
+
 for feat, sentiment in sorted(sentiments, key=itemgetter(1), reverse=True):
     print feat, sentiment
 
-print("--- %s seconds ---getting sentimient" % (time.time() - start_time))
-start_time = time.time()
+    
+    
+   
