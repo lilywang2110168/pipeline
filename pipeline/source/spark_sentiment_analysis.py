@@ -2,7 +2,7 @@ from operator import itemgetter
 import os
 
 import spacy
-import depparse, sentiment
+import depparse, sentiment,extract
 
 path = os.path.join(os.path.dirname(__file__), '../resources/laptop_reviews.txt')
 reviews = extract.reviews_from_file(path, splitter='\n\n')
