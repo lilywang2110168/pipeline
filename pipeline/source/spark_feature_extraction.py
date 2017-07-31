@@ -2,19 +2,21 @@ import nltk
 import pyspark
 from multiprocessing import Pool
 import time
-
+import json
 from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
 from spark import (get_sc, load_table)
 
-category='Laptops'
+
 start_time = time.time()
-sc = get_sc()
-spark = pyspark.sql.SparkSession(sc)
+
 
 #globals
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
+category='Laptops'
+sc = get_sc()
+spark = pyspark.sql.SparkSession(sc)
 
 
 load_table(spark, 'LilyLaptopReviews')
@@ -32,6 +34,8 @@ def parseGrammar(sent):
 def getSentences(row):
   return str(row.reviewText)
     
+
+  
 pool = Pool(16) 
 
 sentences=pool.map(getSentences, df.collect())
@@ -70,13 +74,19 @@ myList = getTopFeatures(dictionary, 10)
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 featurelist = myList2+myList
 
+
+myFile=open('features.txt', 'w')
 data = {}
 data['categoryName'] = category
-feature=[]
+features=[]
 for item in featurelist:
-  feature.append({featureName: item[0], popularityScore:item[1]})
+  feature={}
+  feature["featureName"]=item[0]
+  feature["popularityScore"]=item[1]
+  features.append(feature)
   
-data['features']=feature
+data['features']=features
+json.dump(data, myFile)
 
 
 print("--- %s seconds ---the rest" % (time.time() - start_time))
@@ -97,26 +107,6 @@ result=sc.parallelize(tokens).map(lambda x:cp.parse(x)).collect()
 tokens=df.rdd.map(lambda x:nltk.word_tokenize(str(x.reviewText))).map(lambda x:nltk.pos_tag(x)).collect()
 result=tokens.map(lambda x:cp.parse(x))
 
-dictionary = getUnigrams(tokens)
-dictionaryPhrases = getBigrams(result)
-deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
-
-print "there"
-
-for item in deleteSingle:
-    if item in dictionary:
-        del dictionary[item]
-for item in deletePhrase:
-    if item in dictionaryPhrases:
-        del dictionaryPhrases[item]
-dictionary = getRepresentativeFeatures(dictionary, 10)
-dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
-myList = getTopFeatures(dictionary, 10)
-print myList
-myList2 = getTopFeatures(dictionaryPhrases, 20)
-print myList2
-
-
 
 reviews = [ str(i.reviewText) for i in df.collect()]
 
@@ -126,7 +116,4 @@ for line in reviews:
   for sent in sents:
     sentences.append(sent)
 
-
-tokens = [nltk.word_tokenize(sent) for sent in sentences]
-tokens = [nltk.pos_tag(sent) for sent in tokens]
 '''
