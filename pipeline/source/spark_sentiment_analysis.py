@@ -59,7 +59,7 @@ myFile=open('sentiment.txt', 'w')
 for feat, sentiment in sentiments:
   jline['features'][feat]['sentimentScore']=sentiment
 
-json.dump(jline, myFlie)
+json.dump(jline, myFile)
         
       
 
