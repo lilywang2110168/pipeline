@@ -4,8 +4,7 @@ import pyspark
 import os
 from multiprocessing import Pool
 import time
-
-
+import json
 import spacy
 import depparse, sentiment,extract
 
@@ -13,8 +12,9 @@ import depparse, sentiment,extract
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
-load_table(spark, 'AmazonReviews')
-df = spark.sql('SELECT reviewText from AmazonReviews')
+
+load_table(spark, 'LilyLaptopReviews')
+df = spark.sql('SELECT reviewText from LilyLaptopReviews')
 
 def getSentences(row):
   return str(row.reviewText)
@@ -22,8 +22,12 @@ def getSentences(row):
 pool = Pool(16) 
 
 reviews=pool.map(getSentences, df.collect())
-with open('../resources/laptop_features.txt') as f:
-    nltk_feats = [line[:line.index(':')] for line in f]
+
+##getting the list of features
+with open('features.txt') as f:
+  for line in f:
+    jline=json.loads(line)
+    nltk_feats = [item.featureName for item in jline.features]
 
 print nltk_feats    
 
