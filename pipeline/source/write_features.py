@@ -1,6 +1,7 @@
 from spark import (get_sc, load_table)
 from pyspark.sql import Row
 import pyspark
+import json
 
 category ='Laptops'
 myFlie=open('features.txt', 'w')
