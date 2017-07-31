@@ -56,6 +56,8 @@ pool.join()
 
 dictionary = getUnigrams(tokens)
 dictionaryPhrases = getBigrams(result)
+print("2--- %s seconds ---get unigtrams and get bigrams" % (time.time() - start_time))
+start_time = time.time()
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
 for item in deleteSingle:
@@ -64,12 +66,18 @@ for item in deleteSingle:
 for item in deletePhrase:
     if item in dictionaryPhrases:
         del dictionaryPhrases[item]
+print("2--- %s seconds ---deleting phrases" % (time.time() - start_time))
+start_time = time.time()        
+        
 dictionary = getRepresentativeFeatures(dictionary, 10)
 dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
+
+print("2--- %s seconds ---deal with stemming" % (time.time() - start_time))
 myList = getTopFeatures(dictionary, 10)
 print myList
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2
+print("2--- %s seconds ---get top features" % (time.time() - start_time))
 
 print("2--- %s seconds ---the rest" % (time.time() - start_time))
                  
