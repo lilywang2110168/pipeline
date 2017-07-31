@@ -3,6 +3,7 @@ from spark import (get_sc, load_table)
 import pyspark
 import os
 from multiprocessing import Pool
+import time
 
 
 import spacy
