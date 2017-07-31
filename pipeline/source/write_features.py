@@ -13,7 +13,9 @@ CategoryFeature = spark.createDataFrame(categoryFeature)
 CategoryFeature.show()
 
 
+df = DataFrame(ID='laptops', categoryName='laptops', feautures=categoryFeature)
 
+df.show()
 ##this line of code overwrite a table!!
 ##schemaCategory.write.mode('overwrite').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
 
