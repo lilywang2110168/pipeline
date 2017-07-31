@@ -1,5 +1,6 @@
 from operator import itemgetter
 from spark import (get_sc, load_table)
+import pyspark
 import os
 
 import spacy
