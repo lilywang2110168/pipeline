@@ -12,7 +12,7 @@ data['categoryName'] = category
 features=[]
 for item in featurelist:
   feature={}
-  feature["featureNmae"]=item[0]
+  feature["featureName"]=item[0]
   feature["popularityScore"]=item[1]
   features.append(feature)
   
