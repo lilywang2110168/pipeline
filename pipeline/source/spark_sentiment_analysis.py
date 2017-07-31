@@ -56,8 +56,10 @@ sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in resu
 
 print sentiments
 
-for feat, sentiment in sorted(sentiments, key=itemgetter(1), reverse=True):
-    print feat, sentiment
+for feat, sentiment in sentiments:
+    for item in jline[features]:
+      if feat==item[featureName]
+      
 
     
     
