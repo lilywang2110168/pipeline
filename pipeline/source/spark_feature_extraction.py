@@ -17,8 +17,8 @@ ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 
 
-load_table(spark, 'AmazonReviews')
-df = spark.sql('SELECT reviewText from AmazonReviews')
+load_table(spark, 'LilyLaptopReviews')
+df = spark.sql('SELECT reviewText from LilyLaptopReviews')
 
 
 def parseGrammar(sent):
