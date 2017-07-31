@@ -34,6 +34,8 @@ print nltk_feats
 start_time = time.time()
 nlp = spacy.load('en')
 doc = nlp(unicode('\n\n'.join(reviews[:5000])))
+print doc
+print "I am printing the doc"
 
 print("--- %s seconds ---joining reviews" % (time.time() - start_time))
 start_time = time.time()
