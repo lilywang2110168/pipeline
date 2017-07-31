@@ -12,7 +12,7 @@ categoryFeature = rdd.map(lambda x: Row(featureName=x[0], popularityScore=x[1], 
 CategoryFeature = spark.createDataFrame(categoryFeature)
 CategoryFeature.show()
 
-categoryList=[('latops')]
+categoryList=[('laptops',1), ('electronics',2)]
 category= rdd.map(lambda x: Row(featureName=x[0], features=categoryFeature))
 CategorySchema = spark.createDataFrame(category)
 
