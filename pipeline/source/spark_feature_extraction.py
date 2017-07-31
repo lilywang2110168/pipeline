@@ -72,7 +72,7 @@ myList = getTopFeatures(dictionary, 10)
 myList2 = getTopFeatures(dictionaryPhrases, 20)
 print myList2+myList
 
-print("2--- %s seconds ---the rest" % (time.time() - start_time))
+print("--- %s seconds ---the rest" % (time.time() - start_time))
                  
 '''
 
