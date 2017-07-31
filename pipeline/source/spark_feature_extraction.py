@@ -15,6 +15,7 @@ start_time = time.time()
 ps = nltk.stem.PorterStemmer()
 lemmatizer = nltk.stem.WordNetLemmatizer()
 category='Laptops'
+fileName='features2.txt'
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
@@ -75,7 +76,7 @@ myList2 = getTopFeatures(dictionaryPhrases, 20)
 featurelist = myList2+myList
 
 
-myFile=open('features.txt', 'w')
+myFile=open(fileName, 'w')
 data = {}
 data['categoryName'] = category
 features=[]
