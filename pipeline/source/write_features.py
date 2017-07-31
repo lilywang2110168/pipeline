@@ -8,11 +8,14 @@ featurelist=[('battery life', 13678), ('hard drive', 10898), ('touch screen', 54
 
 data = {}
 data['categoryName'] = category
-feature=[]
+features=[]
 for item in featurelist:
-  feature.append({featureName: item[0], popularityScore:item[1]})
+  feature={}
+  feature["featureNmae"]=item[0]
+  feature["popularityScore"]=item[1]
+  features.append(feature)
   
-data['features']=feature
+data['features']=features
 json.dump(data, myFile)
 ##this line of code overwrite a table!!
 ##schemaCategory.write.mode('overwrite').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
