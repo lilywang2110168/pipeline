@@ -6,6 +6,7 @@ import depparse, sentiment,extract
 
 path = os.path.join(os.path.dirname(__file__), '../resources/laptop_reviews.txt')
 reviews = extract.reviews_from_file(path, splitter='\n\n')
+print reviews
 with open('../resources/laptop_features.txt') as f:
     nltk_feats = [line[:line.index(':')] for line in f]
 
