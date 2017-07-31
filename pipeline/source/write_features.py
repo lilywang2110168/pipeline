@@ -13,7 +13,7 @@ CategoryFeature = spark.createDataFrame(categoryFeature)
 CategoryFeature.show()
 
 
-df = spark.createDataFrame(]ID='laptops', categoryName='laptops', feautures=categoryFeature)
+df = spark.createDataFrame(ID='laptops', categoryName='laptops', feautures=categoryFeature)
 
 df.show()
 ##this line of code overwrite a table!!
