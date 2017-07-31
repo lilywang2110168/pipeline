@@ -9,7 +9,8 @@ import spacy
 import depparse, sentiment,extract
 
 
-
+##globals
+jline={}
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
