@@ -18,7 +18,7 @@ df.show()
 data={}
 for i in df.collect():
    data[str(i.reviewerID)]={}
-  data[str(i.reviewerID)]["reviewerName"]=tr(i.reviewerName)
+   data[str(i.reviewerID)]["reviewerName"]=tr(i.reviewerName)
 
 print data
 
