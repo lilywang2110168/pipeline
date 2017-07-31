@@ -3,6 +3,7 @@ import pyspark
 from spark import (get_sc, load_table)
 import gender_guesser.detector as gender
 from string import digits
+import json
 
 ##globals
 sc = get_sc()
@@ -54,5 +55,5 @@ if __name__ == '__main__':
    for i in df.collect():
       data[str(i.reviewerID)]={}
       data[str(i.reviewerID)]["gender"]=guessGender(str(i.reviewerName))
-   json.dump(data, data)
+   json.dump(data, myFile)
    
