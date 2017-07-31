@@ -4,8 +4,9 @@ from spark import (get_sc, load_table)
 import gender_guesser.detector as gender
 from string import digits
 
-
-
+##globals
+sc = get_sc()
+spark = pyspark.sql.SparkSession(sc)
 d = gender.Detector(case_sensitive=False)
 FEMALE = 0;
 MALE = 1;
