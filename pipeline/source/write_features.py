@@ -12,10 +12,11 @@ categoryFeature = rdd.map(lambda x: Row(featureName=x[0], popularityScore=x[1], 
 CategoryFeature = spark.createDataFrame(categoryFeature)
 CategoryFeature.show()
 
+categoryList=[('latops')]
+category= rdd.map(lambda x: Row(featureName=x[0], features=categoryFeature))
+CategorySchema = spark.createDataFrame(category)
 
-df = spark.createDataFrame(ID='laptops', categoryName='laptops', feautures=categoryFeature)
-
-df.show()
+CategorySchema.show()
 ##this line of code overwrite a table!!
 ##schemaCategory.write.mode('overwrite').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
 
