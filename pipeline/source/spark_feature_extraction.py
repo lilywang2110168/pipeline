@@ -55,8 +55,10 @@ pool.close()
 pool.join() 
 
 dictionary = getUnigrams(tokens)
+print("2--- %s seconds ---get unigtrams" % (time.time() - start_time))
+start_time = time.time()
 dictionaryPhrases = getBigrams(result)
-print("2--- %s seconds ---get unigtrams and get bigrams" % (time.time() - start_time))
+print("2--- %s seconds ---get unigtrams bigrams" % (time.time() - start_time))
 start_time = time.time()
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
