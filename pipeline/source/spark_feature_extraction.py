@@ -71,6 +71,7 @@ stopwords = set(
      "who", "who's", "whoever", "whole", "whom", "whose", "why", "will", "willing", "wish", "with", "within", "without",
      "won't", "wonder", "would", "wouldn't", "x", "y", "yes", "yet", "you", "you'd", "you'll", "you're", "you've",
      "your", "yours", "yourself", "yourselves", "z", "zero"])
+brandSet=set(["apple", "dell"])
 dictionary={}
 def getUnigrams():
     for sent in tokens:
