@@ -1,7 +1,10 @@
 import os
-
+import pyspark
+from spark import (get_sc, load_table)
 import gender_guesser.detector as gender
 from string import digits
+
+
 
 d = gender.Detector(case_sensitive=False)
 FEMALE = 0;
