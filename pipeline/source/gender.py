@@ -12,10 +12,10 @@ FEMALE = 0;
 MALE = 1;
 UNKNOWN = 2;
 load_table(spark, 'LilyLaptopReviews')
-df = spark.sql('SELECT reviewerID from LilyLaptopReviews')
+df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
                
                
-
+'''
 def guessGender(fullname):
     fullname = fullname.replace('"', ' ')
     fullname = fullname.translate(None, digits)
@@ -53,3 +53,4 @@ if __name__ == '__main__':
         for line in f:
             fullname = line.strip()
             print (guessGender(fullname))
+'''
