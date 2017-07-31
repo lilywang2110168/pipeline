@@ -26,6 +26,7 @@ print nltk_feats
 
 nlp = spacy.load('en')
 doc = nlp(unicode('\n\n'.join(reviews[:1000])))
+print doc
 dep_feats = depparse.dependency_features(doc)
 result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
 sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
