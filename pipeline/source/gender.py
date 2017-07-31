@@ -11,19 +11,10 @@ d = gender.Detector(case_sensitive=False)
 FEMALE = 0;
 MALE = 1;
 UNKNOWN = 2;
-load_table(spark, 'LilyLaptopReviews')
-df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
-df.show()
 
-data={}
-for i in df.collect():
-   data[str(i.reviewerID)]={}
-   data[str(i.reviewerID)]["reviewerName"]=str(i.reviewerName)
 
-print data
 
-               
-'''
+              
 def guessGender(fullname):
     fullname = fullname.replace('"', ' ')
     fullname = fullname.translate(None, digits)
@@ -56,9 +47,12 @@ def codeGender(gender):
 
 
 if __name__ == '__main__':
-    path = os.path.join(os.path.dirname(__file__), '..', 'resources', 'fullnames.txt')
-    with open(path) as f:
-        for line in f:
-            fullname = line.strip()
-            print (guessGender(fullname))
-'''
+   myFile=open('gender.txt', 'w')
+   load_table(spark, 'LilyLaptopReviews')
+   df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
+   data={}
+   for i in df.collect():
+      data[str(i.reviewerID)]={}
+      data[str(i.reviewerID)]["gender"]=guessGender(str(i.reviewerName))
+   json.dump(data, data)
+   
