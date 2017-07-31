@@ -72,7 +72,7 @@ stopwords = set(
      "won't", "wonder", "would", "wouldn't", "x", "y", "yes", "yet", "you", "you'd", "you'll", "you're", "you've",
      "your", "yours", "yourself", "yourselves", "z", "zero"])
 dictionary={}
-def getUnigrams:
+def getUnigrams():
     for sent in tokens:
         for word in sent:
             if word[1] == 'NN' or word[1] == 'NNS':
