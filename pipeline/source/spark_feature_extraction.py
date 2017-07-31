@@ -43,8 +43,7 @@ tokens= pool.map(nltk.pos_tag, tokens)
 print("-- %s seconds ---tokenizing and POS tagging" % (time.time() - start_time))
 start_time = time.time()
 result=pool.map(parseGrammar, tokens)
-pool.close() 
-pool.join()
+
 
 print("--- %s seconds ---grammer" % (time.time() - start_time))
 start_time = time.time()
@@ -69,7 +68,11 @@ dictionaryPhrases = getRepresentativeFeatures(dictionaryPhrases, 5)
 
 myList = getTopFeatures(dictionary, 10)
 myList2 = getTopFeatures(dictionaryPhrases, 20)
-print myList2+myList
+featurelist = myList2+myList
+
+data = {}
+data['asin'] = myList[int(id_)]
+            data['ocupationList']=resultList
 
 print("--- %s seconds ---the rest" % (time.time() - start_time))
                  
