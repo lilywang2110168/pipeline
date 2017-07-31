@@ -1,48 +1,34 @@
 from collections import defaultdict
+from functools import partial
 from itertools import permutations
 
-import nltk
+from nltk.stem import PorterStemmer
 
 
 def get_final_feature_descriptors(nltk_features, dep_features):
-    filtered = defaultdict(list)
+    stemmer = PorterStemmer()
+    nltk_features_stemmed = [feat.split(' ') for feat in nltk_features]
+    nltk_features_stemmed = map(partial(map, stemmer.stem), nltk_features_stemmed)
     for dep_feat in dep_features:
-        indices = feat_in(dep_feat, nltk_features)
-        for index in indices:
-            filtered[nltk_features[index]] += dep_feat['descriptors']
+        dep_feat['token_stemmed'] = stemmer.stem(str(dep_feat['token']))
+        dep_feat['compounds_stemmed'] = map(str, dep_feat['compounds'])
+        dep_feat['compounds_stemmed'] = map(stemmer.stem, dep_feat['compounds_stemmed'])
+
+    filtered = defaultdict(list)
+    for nltk_feat, nltk_feat_stemmed in zip(nltk_features, nltk_features_stemmed):
+        for dep_feat in dep_features:
+            if nltk_feat_equals_dep_feat(nltk_feat_stemmed, dep_feat):
+                filtered[nltk_feat] += dep_feat['descriptors']
     return filtered
 
 
-def feat_in(dep_feat, feats):
-    indices = []
-    for index, feat in enumerate(feats):
-        if dep_feat_equals(dep_feat, feat):
-            indices.append(index)
-    return indices
-
-
-def dep_feat_equals(dep_feat, feat):
-    if not dep_feat['compounds']:
-        return feat_equals(str(dep_feat['token']), feat)
-    compound_words = map(str, dep_feat['compounds'])
-    for num_compounds in range(1, len(compound_words) + 1):
-        for compounds in permutations(compound_words, num_compounds):
-            compound_feat = ' '.join(compounds) + ' ' + str(dep_feat['token'])
-            if feat_equals(compound_feat, feat):
-                return True
+def nltk_feat_equals_dep_feat(nltk_feat_stemmed, dep_feat):
+    num_compounds = len(nltk_feat_stemmed) - 1
+    for compounds_stemmed in permutations(dep_feat['compounds_stemmed'], num_compounds):
+        compound_dep_feat = list(compounds_stemmed) + [dep_feat['token_stemmed']]
+        if compound_dep_feat == nltk_feat_stemmed:
+            return True
     return False
-
-
-def feat_equals(feat1, feat2):
-    split1 = feat1.split(' ')
-    split2 = feat2.split(' ')
-    if len(split1) != len(split2):
-        return False
-    stemmer = nltk.stem.PorterStemmer()
-    stem1 = map(stemmer.stem, split1)
-    stem2 = map(stemmer.stem, split2)
-    equal = [s1 == s2 for s1, s2 in zip(stem1, stem2)]
-    return all(equal)
 
 
 def dependency_features(doc):
