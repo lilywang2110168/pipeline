@@ -43,7 +43,7 @@ def getSentences(row):
     
 pool = Pool(16) 
 
-reviews=pool.map(getSentences, df.collect())
+sentences=pool.map(getSentences, df.collect())
 print("2--- %s seconds ---loading data" % (time.time() - start_time))
 start_time = time.time()
 
