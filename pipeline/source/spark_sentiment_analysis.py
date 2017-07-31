@@ -28,7 +28,7 @@ reviews=pool.map(getSentences, df.collect())
 with open('features.txt') as f:
   for line in f:
     jline=json.loads(line)
-    nltk_feats = [str(item['featureName']) for item in jline['features']]
+    nltk_feats = [str(key) for key,value in jline['features']]
 
 print nltk_feats    
 
