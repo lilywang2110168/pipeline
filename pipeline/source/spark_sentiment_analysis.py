@@ -31,7 +31,7 @@ start_time = time.time()
 nlp = spacy.load('en')
 doc = nlp(unicode('\n\n'.join(reviews[:5000])))
 
-print("--- %s seconds ---joining revies" % (time.time() - start_time))
+print("--- %s seconds ---joining reviews" % (time.time() - start_time))
 start_time = time.time()
 
 
