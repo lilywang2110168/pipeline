@@ -45,16 +45,15 @@ start_time = time.time()
 result=pool.map(parseGrammar, tokens)
 pool.close() 
 pool.join()
+
 print("--- %s seconds ---grammer" % (time.time() - start_time))
 start_time = time.time()
 pool.close() 
 pool.join() 
 
 dictionary=getUnigrams(tokens)
-print("--- %s seconds ---get unigrams" % (time.time() - start_time))
-start_time = time.time()
 dictionaryPhrases = getBigrams(result)
-print("--- %s seconds ---get bigrams" % (time.time() - start_time))
+print("--- %s seconds ---get uimgrams and bigrams" % (time.time() - start_time))
 start_time = time.time()
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
