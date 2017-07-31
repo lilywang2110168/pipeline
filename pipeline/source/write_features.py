@@ -2,21 +2,17 @@ from spark import (get_sc, load_table)
 from pyspark.sql import Row
 import pyspark
 
-sc = get_sc()
-spark = pyspark.sql.SparkSession(sc)
+category ='Laptops'
 
-featureList=[('battery life', 18246), ('hard drive', 13871), ('touch screen', 9142), ('customer service', 5103), ('operating system', 4034), ('mouse pad', 2868), ('backlit keyboard', 2851), ('light weight', 2535), ('build quality', 2425), ('tech support', 2029), ('video card', 2027), ('optical drive', 1817), ('screen size', 1787), ('screen resolution', 1690), ('power cord', 1622), ('word processing', 1558), ('wireless mouse', 1516), ('number pad', 1455), ('desktop replacement', 1431), ('sound quality', 1423), ('power button', 1404), ('machine', 38026), ('quality', 20565), ('software', 19433), ('model', 17029), ('program', 16181), ('window', 15763), ('size', 15679), ('graphic', 13216), ('speaker', 13088), ('speed', 13049), ('desktop', 12682)]
+featurelist=[('battery life', 13678), ('hard drive', 10898), ('touch screen', 5479), ('customer service', 3972), ('operating system', 2900), ('backlit keyboard', 2113), ('mouse pad', 2103), ('build quality', 1881), ('light weight', 1641), ('video card', 1631), ('tech support', 1611), ('optical drive', 1457), ('power cord', 1299), ('screen size', 1295), ('screen resolution', 1215), ('word processing', 1181), ('wireless mouse', 1145), ('desktop replacement', 1130), ('number pad', 1115), ('power button', 1070), ('sound quality', 1057), ('machine', 29086), ('software', 15176), ('program', 12285), ('size', 11460), ('port', 10916), ('window', 10831), ('graphic', 10357), ('speaker', 10275), ('button', 9890), ('desktop', 9632), ('speed', 9481)]
 
-rdd = sc.parallelize(featureList)
-categoryFeature = rdd.map(lambda x: Row(featureName=x[0], popularityScore=x[1], sentimentScore=0))
-CategoryFeature = spark.createDataFrame(categoryFeature)
-CategoryFeature.show()
-
-categoryList=[('laptops',1), ('electronics',2)]
-category= rdd.map(lambda x: Row(featureName=x[0], features=CategoryFeature))
-CategorySchema = spark.createDataFrame(category)
-
-CategorySchema.show()
+data = {}
+data['categoryName'] = category
+feature=[]
+for item in featurelist:
+  feature.append({featureName: item[0], popularityScore:item[1]})
+  
+data['features']=feature
 ##this line of code overwrite a table!!
 ##schemaCategory.write.mode('overwrite').format('com.intersys.spark').option('dbtable', 'ISC_DM.{}'.format("testCategory")).save()
 
