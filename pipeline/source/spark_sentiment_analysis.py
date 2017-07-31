@@ -4,9 +4,17 @@ import os
 import spacy
 import depparse, sentiment,extract
 
-path = os.path.join(os.path.dirname(__file__), '../resources/laptop_reviews.txt')
-reviews = extract.reviews_from_file(path, splitter='\n\n')
-print reviews
+sc = get_sc()
+spark = pyspark.sql.SparkSession(sc)
+load_table(spark, 'AmazonReviews')
+df = spark.sql('SELECT reviewText from AmazonReviews')
+
+def getSentences(row):
+  return str(row.reviewText)
+    
+pool = Pool(16) 
+
+reviews=pool.map(getSentences, df.collect())
 with open('../resources/laptop_features.txt') as f:
     nltk_feats = [line[:line.index(':')] for line in f]
 
