@@ -13,7 +13,7 @@ CategoryFeature = spark.createDataFrame(categoryFeature)
 CategoryFeature.show()
 
 categoryList=[('laptops',1), ('electronics',2)]
-category= rdd.map(lambda x: Row(featureName=x[0], features=categoryFeature))
+category= rdd.map(lambda x: Row(featureName=x[0], features=CategoryFeature))
 CategorySchema = spark.createDataFrame(category)
 
 CategorySchema.show()
