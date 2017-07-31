@@ -13,7 +13,6 @@ features={}
 for item in featurelist:
   features[item[0]]={}
   features[item[0]]["popularityScore"]=item[1]
-  features.append(feature)
   
 data['features']=features
 json.dump(data, myFile)
