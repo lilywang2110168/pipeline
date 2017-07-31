@@ -34,7 +34,7 @@ print nltk_feats
 
 start_time = time.time()
 nlp = spacy.load('en')
-doc = nlp(unicode('\n\n'.join(reviews[:5000])))
+doc = nlp(unicode('\n\n'.join(reviews[:1000])))
 
 print("--- %s seconds ---joining reviews" % (time.time() - start_time))
 start_time = time.time()
@@ -55,10 +55,12 @@ start_time = time.time()
 sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
 
 print sentiments
-
+myFile=open('sentiment.txt', 'w')
 for feat, sentiment in sentiments:
-    for item in jline[features]:
-      if feat==item[featureName]
+  jline['features'][feat]['sentimentScore']=sentiment
+
+json.dump(jline, myFlie)
+        
       
 
     
