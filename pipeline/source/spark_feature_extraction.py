@@ -35,10 +35,9 @@ def getSentences(row):
 pool = Pool(16) 
 
 sentences=pool.map(getSentences, df.collect())
-print("2--- %s seconds ---loading data" % (time.time() - start_time))
+print("--- %s seconds ---loading data" % (time.time() - start_time))
 start_time = time.time()
 
-pool = Pool(16) 
 tokens = pool.map(nltk.word_tokenize, sentences)
 tokens= pool.map(nltk.pos_tag, tokens)
 print("-- %s seconds ---tokenizing and POS tagging" % (time.time() - start_time))
@@ -46,16 +45,16 @@ start_time = time.time()
 result=pool.map(parseGrammar, tokens)
 pool.close() 
 pool.join()
-print("2--- %s seconds ---grammer" % (time.time() - start_time))
+print("--- %s seconds ---grammer" % (time.time() - start_time))
 start_time = time.time()
 pool.close() 
 pool.join() 
 
 dictionary=getUnigrams(tokens)
-print("2--- %s seconds ---get unigrams" % (time.time() - start_time))
+print("--- %s seconds ---get unigrams" % (time.time() - start_time))
 start_time = time.time()
 dictionaryPhrases = getBigrams(result)
-print("2--- %s seconds ---get bigrams" % (time.time() - start_time))
+print("--- %s seconds ---get bigrams" % (time.time() - start_time))
 start_time = time.time()
 deleteSingle, deletePhrase = pruneFeature(dictionary, dictionaryPhrases)
 
@@ -113,17 +112,6 @@ print myList2
 
 
 reviews = [ str(i.reviewText) for i in df.collect()]
-sentences=[]
-for line in reviews:
-  sents = nltk.sent_tokenize(line)
-  for sent in sents:
-    sentences.append(sent)
-  
-reviews=sc.parallelize(sentences)
-mydata.map(lambda x: x.split('\t')).\
-    map(lambda y: (y[0], y[2], y[1]))
-
-reviews = [ str(i.reviewText) for i in df.collect()]
 
 sentences=[]
 for line in reviews:
@@ -131,9 +119,6 @@ for line in reviews:
   for sent in sents:
     sentences.append(sent)
 
-
-
-print "I am here"
 
 tokens = [nltk.word_tokenize(sent) for sent in sentences]
 tokens = [nltk.pos_tag(sent) for sent in tokens]
