@@ -22,6 +22,8 @@ reviews=pool.map(getSentences, df.collect())
 with open('../resources/laptop_features.txt') as f:
     nltk_feats = [line[:line.index(':')] for line in f]
 
+print nltk_feats    
+
 nlp = spacy.load('en')
 doc = nlp(unicode('\n\n'.join(reviews[:1000])))
 dep_feats = depparse.dependency_features(doc)
