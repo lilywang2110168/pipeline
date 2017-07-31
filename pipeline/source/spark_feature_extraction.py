@@ -41,7 +41,7 @@ cp = nltk.RegexpParser(grammar)
 sentences = [ str(i.reviewText) for i in df.collect()]
 start_time = time.time()
 
-pool = Pool(24) 
+pool = Pool(16) 
 tokens = pool.map(nltk.word_tokenize, sentences)
 tokens= pool.map(nltk.pos_tag, tokens)
 print("-- %s seconds ---tokenizing and POS tagging" % (time.time() - start_time))
