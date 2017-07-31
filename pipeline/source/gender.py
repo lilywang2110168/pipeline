@@ -11,7 +11,10 @@ d = gender.Detector(case_sensitive=False)
 FEMALE = 0;
 MALE = 1;
 UNKNOWN = 2;
-
+load_table(spark, 'LilyLaptopReviews')
+df = spark.sql('SELECT reviewerID from LilyLaptopReviews')
+               
+               
 
 def guessGender(fullname):
     fullname = fullname.replace('"', ' ')
