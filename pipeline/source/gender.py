@@ -6,15 +6,10 @@ from string import digits
 import json
 
 ##globals
-sc = get_sc()
-spark = pyspark.sql.SparkSession(sc)
 d = gender.Detector(case_sensitive=False)
 FEMALE = 0;
 MALE = 1;
 UNKNOWN = 2;
-
-
-
               
 def guessGender(fullname):
     fullname = fullname.replace('"', ' ')
@@ -48,12 +43,14 @@ def codeGender(gender):
 
 
 if __name__ == '__main__':
-   myFile=open('gender.txt', 'w')
-   load_table(spark, 'LilyLaptopReviews')
-   df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
-   data={}
-   for i in df.collect():
-      data[str(i.reviewerID)]={}
-      data[str(i.reviewerID)]["gender"]=guessGender(str(i.reviewerName))
-   json.dump(data, myFile)
+  myFile=open('gender.txt', 'w')
+  sc = get_sc()
+  spark = pyspark.sql.SparkSession(sc)
+  load_table(spark, 'LilyLaptopReviews')
+  df = spark.sql('SELECT reviewerID, reviewerName from LilyLaptopReviews')
+  data={}
+  for i in df.collect():
+    data[str(i.reviewerID)]={}
+    data[str(i.reviewerID)]["gender"]=guessGender(str(i.reviewerName))
+  json.dump(data, myFile)
    
