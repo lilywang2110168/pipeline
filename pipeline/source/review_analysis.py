@@ -16,7 +16,7 @@ load_tableDatabase(spark, 'Category_features')
 
 
 df = spark.sql("SELECT features_featureName from Category_features where Category='laptops'")
-df.show()
+nltk_feats=[str(i.features_featureName) for i in df.collect()]
 
 '''
 
