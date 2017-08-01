@@ -45,6 +45,7 @@ def senti_analysis(i):
       tmp["featureName"]=item[0]
       tmp["sentimentScore"]=item[0]
       data['features'].append(tmp)
+    print data  
     return data
   
 pool = Pool(16) 
