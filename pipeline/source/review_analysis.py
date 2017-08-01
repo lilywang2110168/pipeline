@@ -23,6 +23,7 @@ featureList=set(['size', 'screen resolution', 'number pad', 'desktop replacement
 
 df = spark.sql("SELECT reviewText, ID from LilyLaptopReviews")
 df.show()
+nlp = spacy.load('en')
 
 for i in df.collect():
   review=i.reviewText
