@@ -15,5 +15,5 @@ spark = pyspark.sql.SparkSession(sc)
 load_tableDatabase(spark, 'ReviewAnalysis_features')
 load_tableDatabase(spark, 'ReviewAnalysis')
 
-df= spark.sql("SELECT product, reviewID from ReviewAnalysis")
+df= spark.sql("SELECT product, reviewiD from ReviewAnalysis")
 df.show()
