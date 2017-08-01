@@ -41,6 +41,7 @@ for key in dictionnary:
     tmp["popularityScore"]=len(features[key])
     data['features'].append(tmp)
   json.dump(data, myFile)
+  print data
   myFile.write('\n')
   
     
