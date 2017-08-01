@@ -8,5 +8,6 @@ import json
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
-load_table(spark, 'LilyLaptopReviews')
+load_tableDB(spark, 'LilyLaptopReviews')
+load_tableSQL()
 df = spark.sql('SELECT reviewText from LilyLaptopReviews')
