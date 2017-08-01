@@ -29,7 +29,11 @@ nlp = spacy.load('en')
 myFile=open('reviewAnalysis.txt', 'w')
 
 data={}
+c=0.0
 for i in df.collect():
+  c+=1
+  if(c/1000==0):
+    print c +"lines processed"
   review=i.reviewText
   doc = nlp(unicode(review))
   dep_feats = depparse.dependency_features(doc)
@@ -42,7 +46,6 @@ for i in df.collect():
       tmp["featureName"]=item[0]
       tmp["sentimentScore"]=item[0]
       data[i.ID].append(tmp)
-    print data[i.ID]
     
 json.dump(data, myFile)
   
