@@ -5,6 +5,7 @@ import os
 import time
 import json
 import depparse, sentiment,extract
+import spacy
 
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
