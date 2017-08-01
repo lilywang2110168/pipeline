@@ -36,10 +36,12 @@ for i in df.collect():
   result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
   sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
   if(len(sentiments)>0):
-    data[i.ID]={}
+    data[i.ID]=[]
     for item in sentiments:
-      data[i.ID]["featureName"]=item[0]
-      data[i.ID]["sentimentScore"]=item[0]
+      tmp={}
+      tmp["featureName"]=item[0]
+      tmp["sentimentScore"]=item[0]
+      data[i.ID].append(tmp)
     print data[i.ID]
     
 json.dump(data, myFile)
