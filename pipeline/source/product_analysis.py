@@ -21,4 +21,4 @@ df.show()
 ##create a dictionary of productID pointing to reviewIDs???
 
 
-##then how do you get the features associated with the products????
+##then how do you get the features associated with the reviews????
