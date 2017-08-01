@@ -30,24 +30,28 @@ myFile=open('reviewAnalysis.txt', 'w')
 
 data={}
 c=0.0
-for i in df.collect():
-  c+=1
-  if(c/1000==0):
-    print c +"lines processed"
-  review=i.reviewText
-  doc = nlp(unicode(review))
+
+def senti_analysis(i):
+  doc = nlp(unicode(i.review))
   dep_feats = depparse.dependency_features(doc)
   result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
   sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
   if(len(sentiments)>0):
-    data[i.ID]=[]
+    data={}
+    data['features']=[]
+    data["ID"]=i.ID
     for item in sentiments:
       tmp={}
       tmp["featureName"]=item[0]
       tmp["sentimentScore"]=item[0]
-      data[i.ID].append(tmp)
+      data['features'].append(tmp)
+    return data
+  
+pool = Pool(16) 
+data=pool.map(senti_analysis, df.collect())
+  
     
-json.dump(data, myFile)
+    
   
   
   
