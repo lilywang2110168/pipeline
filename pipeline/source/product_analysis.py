@@ -15,8 +15,13 @@ spark = pyspark.sql.SparkSession(sc)
 load_tableDatabase(spark, 'ReviewAnalysis_features')
 load_tableDatabase(spark, 'ReviewAnalysis')
 
-df= spark.sql("SELECT product, reviewiD from ReviewAnalysis")
+df= spark.sql("SELECT product, reviewId from ReviewAnalysis")
 df.show()
+
+df2=spark.sql('SELECT ReviewAnalysis.product, ReviewAnalysis.reviewId, ReviewAnalysis_features.features_featureName, ReviewAnalysis_features.features_featureName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID')
+
 
 ##create a dictionary of productID pointing to reviewIDs???
 
