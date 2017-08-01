@@ -13,5 +13,6 @@ load_tableDatabase(spark, 'Category')
 
 df = spark.sql("SELECT features, categoryName from Category where categoryName='laptops'")
 df.show()
-print df.features
+for i in df.collect:
+  print i.features
 
