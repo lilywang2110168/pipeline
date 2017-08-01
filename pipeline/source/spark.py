@@ -9,10 +9,10 @@ def get_sc():
         .set("spark.cache.master.password", "SYS")
     return pyspark.SparkContext(master='local[*]', appName='reviews', conf=conf)
 
-def load_table(spark, table_name):
+def load_table(spark, table_name,db):
     df = spark.read \
         .format('com.intersys.spark') \
-        .option('dbtable', 'Database.{}'.format(table_name)) \
+        .option('dbtable', db.format(table_name)) \
         .load()
     ##do you have to register this as a temp table?     
     df.registerTempTable(table_name)
