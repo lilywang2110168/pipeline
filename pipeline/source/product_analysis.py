@@ -29,7 +29,7 @@ for i in df.collect():
 
 myFile=open('productAnalysis.txt', 'w')
 
-for key in dictionnary:
+for key in dictionary:
   data={}
   data['productID']=key
   data['features']=[]
