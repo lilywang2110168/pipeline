@@ -12,7 +12,7 @@ def get_sc():
 def load_table(spark, table_name):
     df = spark.read \
         .format('com.intersys.spark') \
-        .option('dbtable', 'ISC_DM.{}'.format(table_name)) \
+        .option('dbtable', 'Database.{}'.format(table_name)) \
         .load()
     ##do you have to register this as a temp table?     
     df.registerTempTable(table_name)
