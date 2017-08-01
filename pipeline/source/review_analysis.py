@@ -44,6 +44,8 @@ def senti_analysis(i):
 pool = Pool(16) 
 data=pool.map(senti_analysis, df.collect())
 
+pool.join()
+pool.close()
 
 for item in data:
   if(item!=None):
