@@ -15,8 +15,22 @@ spark = pyspark.sql.SparkSession(sc)
 load_tableDatabase(spark, 'ReviewAnalysis_features')
 load_tableDatabase(spark, 'ReviewAnalysis')
 
-df2=spark.sql('SELECT ReviewAnalysis.product, ReviewAnalysis.reviewId, ReviewAnalysis_features.features_featureName, ReviewAnalysis_features.features_sentimentScore FROM ReviewAnalysis INNER JOIN ReviewAnalysis_features ON ReviewAnalysis_features.ReviewAnalysis=ReviewAnalysis.reviewID')
-df2.show()
+df=spark.sql('SELECT ReviewAnalysis.product, ReviewAnalysis.reviewId, ReviewAnalysis_features.features_featureName, ReviewAnalysis_features.features_sentimentScore FROM ReviewAnalysis INNER JOIN ReviewAnalysis_features ON ReviewAnalysis_features.ReviewAnalysis=ReviewAnalysis.reviewID')
+df.show()
+
+dictionary={}
+for i in df.collect():
+  if i.product not in dictionary:
+    dictionary[i.product]={}
+  if i.features_featureName not in  dictionary[i.product]:
+    dictionary[i.product][i.features_featureName]=[]
+  dictionary[i.product][i.features_featureName].append(i.features_sentimentScore)
+
+print dictionary
+     
+      
+  
+  
 
 ##create a dictionary of productID pointing to reviewIDs???
 
