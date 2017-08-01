@@ -12,14 +12,12 @@ sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
 load_tableISCDM(spark, 'LilyLaptopReviews')
-load_tableDatabase(spark, 'Category')
+load_tableDatabase(spark, 'Category_features')
 
-'''
-df = spark.sql("SELECT features, categoryName from Category where categoryName='laptops'")
+
+df = spark.sql("SELECT features_featureName from Category_features where Category='laptops'")
 df.show()
-for i in df.collect():
-  print i.features
-  print type(i.features)
+
 '''
 
 nltk_feats=['size', 'screen resolution', 'number pad', 'desktop replacement', 'hard drive', 'touch screen', 'speed', 'port', 'wireless mouse', 'build quality', 'sound quality', 'desktop', 'machine', 'window', 'program', 'speaker', 'power cord', 'screen size', 'power button', 'backlit keyboard', 'customer service', 'word processing', 'video card', 'graphic', 'operating system', 'button', 'tech support', 'battery life', 'light weight', 'optical drive', 'mouse pad', 'software']
@@ -30,7 +28,6 @@ nlp = spacy.load('en')
 myFile=open('reviewAnalysis.txt', 'w')
 
 data={}
-c=0.0
 
 def senti_analysis(i):
   doc = nlp(unicode(i.reviewText))
@@ -59,7 +56,7 @@ for item in data:
   
   
     
-    
+'''    
   
   
   
