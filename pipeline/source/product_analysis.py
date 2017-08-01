@@ -24,7 +24,7 @@ for i in df.collect():
     dictionary[i.product]={}
   if i.features_featureName not in  dictionary[i.product]:
     dictionary[i.product][i.features_featureName]=[]
-  dictionary[i.product][i.features_featureName].append(double(i.features_sentimentScore))
+  dictionary[i.product][i.features_featureName].append(float(i.features_sentimentScore))
 
 print dictionary
      
