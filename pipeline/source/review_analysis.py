@@ -19,7 +19,7 @@ for i in df.collect():
   print i.features
   print type(i.features)
 
-featureList=set(['size', 'screen resolution', 'number pad', 'desktop replacement', 'hard drive', 'touch screen', 'speed', 'port', 'wireless mouse', 'build quality', 'sound quality', 'desktop', 'machine', 'window', 'program', 'speaker', 'power cord', 'screen size', 'power button', 'backlit keyboard', 'customer service', 'word processing', 'video card', 'graphic', 'operating system', 'button', 'tech support', 'battery life', 'light weight', 'optical drive', 'mouse pad', 'software'])
+nltk_feats=['size', 'screen resolution', 'number pad', 'desktop replacement', 'hard drive', 'touch screen', 'speed', 'port', 'wireless mouse', 'build quality', 'sound quality', 'desktop', 'machine', 'window', 'program', 'speaker', 'power cord', 'screen size', 'power button', 'backlit keyboard', 'customer service', 'word processing', 'video card', 'graphic', 'operating system', 'button', 'tech support', 'battery life', 'light weight', 'optical drive', 'mouse pad', 'software']
 
 df = spark.sql("SELECT reviewText, ID from LilyLaptopReviews")
 df.show()
