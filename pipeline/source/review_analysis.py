@@ -26,14 +26,23 @@ nltk_feats=['size', 'screen resolution', 'number pad', 'desktop replacement', 'h
 df = spark.sql("SELECT reviewText, ID from LilyLaptopReviews")
 df.show()
 nlp = spacy.load('en')
+myFile=open('reviewAnalysis.txt', 'w')
 
+data={}
 for i in df.collect():
   review=i.reviewText
   doc = nlp(unicode(review))
   dep_feats = depparse.dependency_features(doc)
   result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
   sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
-  print sentiments
+  if(len(sentiments)>0):
+    data[i.ID]={}
+    for item in sentiments:
+      data[i.ID]["featureName"]=item[0]
+      data[i.ID]["sentimentScore"]=item[0]
+    print data[i.ID]
+    
+json.dump(data, myFile)
   
   
   
