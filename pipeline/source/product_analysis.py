@@ -17,3 +17,8 @@ load_tableDatabase(spark, 'ReviewAnalysis')
 
 df= spark.sql("SELECT product, reviewiD from ReviewAnalysis")
 df.show()
+
+##create a dictionary of productID pointing to reviewIDs???
+
+
+##then how do you get the features associated with the products????
