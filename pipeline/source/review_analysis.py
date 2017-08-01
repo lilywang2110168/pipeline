@@ -15,5 +15,5 @@ df = spark.sql("SELECT features, categoryName from Category where categoryName='
 df.show()
 for i in df.collect():
   print i.features
-  print type(features)
+  print type(i.features)
 
