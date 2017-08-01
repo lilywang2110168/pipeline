@@ -5,7 +5,8 @@ from numpy import (average, mean, sign)
 
 
 def feature_sentiment(descriptors):
-    return scale(mean(map(descriptor_sentiment, descriptors)), root=3)
+    raw_score = mean(map(descriptor_sentiment, descriptors)) if descriptors else 0
+    return scale(raw_score, root=3)
 
 
 def descriptor_sentiment(descriptor):
