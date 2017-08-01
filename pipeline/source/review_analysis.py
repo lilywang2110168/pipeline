@@ -44,7 +44,7 @@ def senti_analysis(i):
     for item in sentiments:
       tmp={}
       tmp["featureName"]=item[0]
-      tmp["sentimentScore"]=item[0]
+      tmp["sentimentScore"]=item[1]
       data['features'].append(tmp)
     return data
   
