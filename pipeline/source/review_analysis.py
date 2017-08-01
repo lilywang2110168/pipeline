@@ -15,12 +15,8 @@ load_tableISCDM(spark, 'LilyLaptopReviews')
 load_tableDatabase(spark, 'Category_features')
 
 
-df = spark.sql("SELECT features_featureName from Category_features where Category='laptops'")
-nltk_feats=[str(i.features_featureName) for i in df.collect()]
-print nltk_feats
-'''
-
-nltk_feats=['size', 'screen resolution', 'number pad', 'desktop replacement', 'hard drive', 'touch screen', 'speed', 'port', 'wireless mouse', 'build quality', 'sound quality', 'desktop', 'machine', 'window', 'program', 'speaker', 'power cord', 'screen size', 'power button', 'backlit keyboard', 'customer service', 'word processing', 'video card', 'graphic', 'operating system', 'button', 'tech support', 'battery life', 'light weight', 'optical drive', 'mouse pad', 'software']
+df1 = spark.sql("SELECT features_featureName from Category_features where Category='laptops'")
+nltk_feats=[str(i.features_featureName) for i in df1.collect()]
 
 df = spark.sql("SELECT reviewText, ID from LilyLaptopReviews")
 df.show()
