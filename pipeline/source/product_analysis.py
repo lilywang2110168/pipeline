@@ -7,6 +7,7 @@ import time
 import json
 import depparse, sentiment,extract
 import spacy
+import numpy
 
 
 sc = get_sc()
@@ -26,7 +27,28 @@ for i in df.collect():
     dictionary[i.product][i.features_featureName]=[]
   dictionary[i.product][i.features_featureName].append(float(i.features_sentimentScore))
 
-print dictionary
+myFile=open('productAnalysis.txt', 'w')
+
+for key in dictionnary:
+  data={}
+  data['productID']=key
+  data['features']=[]
+  features=dictionary[key]
+  for key in features:
+    tmp={}
+    tmp['featureName']=key
+    tmp["sentimentScore"]=numpy.mean(features[key])
+    tmp["popularityScore"]=len(features[key])
+    data['features'].append(tmp)
+  json.dump(data, myFile)
+  myFile.write('\n')
+  
+    
+  
+    
+    
+    
+  
      
       
   
