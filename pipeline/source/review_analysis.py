@@ -53,8 +53,9 @@ data=pool.map(senti_analysis, df.collect())
 
 
 for item in data:
-  json.dump(item,myFile)
-  myFile.write('\n')
+  if(item!=None):
+    json.dump(item,myFile)
+    myFile.write('\n')
   
   
     
