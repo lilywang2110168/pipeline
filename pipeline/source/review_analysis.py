@@ -11,6 +11,6 @@ spark = pyspark.sql.SparkSession(sc)
 load_table(spark, 'LilyLaptopReviews', 'ISC.DM.{}')
 load_table(spark, 'Category', 'Database.{}')
 
-df = spark.sql('SELECT features from Category WHERE categoryName ='Laptops')
+df = spark.sql("SELECT features from Category WHERE categoryName ='Laptops'")
 df.show()
 
