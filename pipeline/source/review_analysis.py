@@ -33,7 +33,7 @@ data={}
 c=0.0
 
 def senti_analysis(i):
-  doc = nlp(unicode(i.review))
+  doc = nlp(unicode(i.reviewText))
   dep_feats = depparse.dependency_features(doc)
   result = depparse.get_final_feature_descriptors(nltk_feats, dep_feats)
   sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
