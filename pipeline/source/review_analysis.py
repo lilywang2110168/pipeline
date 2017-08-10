@@ -11,14 +11,14 @@ import spacy
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
-load_tableISCDM(spark, 'LilyLaptopReviews')
+load_tableISCDM(spark, 'h')
 load_tableDatabase(spark, 'Category_features')
 
 
-df1 = spark.sql("SELECT features_featureName from Category_features where Category='laptops'")
+df1 = spark.sql("SELECT features_featureName from Category_features where Category='headphones'")
 nltk_feats=[str(i.features_featureName) for i in df1.collect()]
 
-df = spark.sql("SELECT reviewText, ID from LilyLaptopReviews")
+df = spark.sql("SELECT reviewText, ID from h")
 df.show()
 nlp = spacy.load('en')
 myFile=open('reviewAnalysis.txt', 'w')
