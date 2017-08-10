@@ -20,7 +20,7 @@ sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
 
-load_table(spark, 'h')
+load_tableISCDM(spark, 'h')
 df = spark.sql('SELECT reviewText from h')
 
 
