@@ -56,8 +56,10 @@ sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in resu
 
 print sentiments
 myFile=open('sentiment_headphones.json', 'w')
-for feat, sentiment in sentiments:
-  jline['features'][feat]['sentimentScore']=sentiment
+for featureName, sentiment in sentiments:
+    for i, feat in enumerate(jline['features']):
+        if featureName == feat['featureName']:
+            jline['features'][i]['sentimentScore'] = sentiment
 
 json.dump(jline, myFile)
         
