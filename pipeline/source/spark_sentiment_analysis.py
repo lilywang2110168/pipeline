@@ -28,7 +28,7 @@ reviews=pool.map(getSentences, df.collect())
 with open('features_headphones.json') as f:
   for line in f:
     jline=json.loads(line)
-    nltk_feats = [str(feat[0]) for feat in jline['features']]
+    nltk_feats = [str(feat['featureName']) for feat in jline['features']]
 
 print nltk_feats    
 
