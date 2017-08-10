@@ -1,5 +1,5 @@
 from operator import itemgetter
-from spark import (get_sc, load_table)
+from spark import (get_sc, load_tableISCDM)
 import pyspark
 import os
 from multiprocessing import Pool
@@ -14,8 +14,8 @@ jline={}
 sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
-load_table(spark, 'LilyLaptopReviews')
-df = spark.sql('SELECT reviewText from LilyLaptopReviews')
+load_tableISCDM(spark, 'h')
+df = spark.sql('SELECT reviewText from h')
 
 def getSentences(row):
   return str(row.reviewText)
@@ -25,7 +25,7 @@ pool = Pool(16)
 reviews=pool.map(getSentences, df.collect())
 
 ##getting the list of features
-with open('features.txt') as f:
+with open('features_headphones.json') as f:
   for line in f:
     jline=json.loads(line)
     nltk_feats = [str(key) for key in jline['features']]
@@ -55,7 +55,7 @@ start_time = time.time()
 sentiments = [(feat, sentiment.feature_sentiment(descs)) for feat, descs in result.iteritems()]
 
 print sentiments
-myFile=open('sentiment.txt', 'w')
+myFile=open('sentiment_headphones.json', 'w')
 for feat, sentiment in sentiments:
   jline['features'][feat]['sentimentScore']=sentiment
 
