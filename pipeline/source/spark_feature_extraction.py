@@ -20,8 +20,8 @@ sc = get_sc()
 spark = pyspark.sql.SparkSession(sc)
 
 
-load_table(spark, 'LilyLaptopReviews')
-df = spark.sql('SELECT reviewText from LilyLaptopReviews')
+load_table(spark, 'h')
+df = spark.sql('SELECT reviewText from h')
 
 
 def parseGrammar(sent):
