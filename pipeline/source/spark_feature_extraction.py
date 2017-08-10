@@ -5,7 +5,7 @@ import time
 import json
 from feature_extraction import ( getUnigrams, getBigrams, pruneFeature, getRepresentativeFeatures,
                                                 getTopFeatures)
-from spark import (get_sc, load_table)
+from spark import (get_sc, load_tableISCDM)
 
 
 start_time = time.time()
